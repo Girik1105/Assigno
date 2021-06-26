@@ -1,0 +1,92 @@
+*
+{
+    padding:0;
+    margin:0;
+    font-family:sans-serif;
+}
+
+html
+{
+    font-size: 9px;
+}
+
+
+/* for background*/
+body
+{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 100vh;
+    background:url(Back.jpg);
+    background-size:cover;
+    background-position: center;
+}
+
+/* For the color of teh box 
+Outline pf the white box 
+Amd size of the Box*/ 
+.container
+{
+    display: grid;
+    grid-template-columns:0.6fr 1fr 1fr 1fr;
+    grid-template-rows:0.2fr 0.2fr 0.4fr 0.6fr 0.3fr;
+    grid-template-areas:"navbar navbar navbar navbar"
+                        "sidebar header header header"
+                        "sidebar card1 card2 card3"
+                        "sidebar graph graph debitcard"
+                        "sidebar card4 card5 card6";
+                        grid-gap: 1rem;
+                        padding: 2rem;
+    width: 90%;            
+    height: 85vh;
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+    border-radius: 1.4rem;
+    
+
+
+}
+.container div{
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+}
+
+.navbar{
+    grid-area:  navbar;
+} 
+
+.sidebar{
+    grid-area: sidebar;
+}
+
+.header{
+    grid-area:  header;
+}
+
+.card1{
+    grid-area:  card1;
+}
+.card2{
+    grid-area:  card2;
+}
+.card3{
+    grid-area:  card3;
+}
+
+.graph{
+    grid-area:  graph;
+}
+.debitcard{
+    grid-area:  debitcard;
+}
+.card4{
+    grid-area:  card4;
+}
+.card5{
+    grid-area:  card5;
+}
+.card6{
+    grid-area:  card6;
+}
+
+
+
