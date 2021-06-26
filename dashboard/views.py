@@ -139,3 +139,18 @@ class create_notes(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.save()
         return redirect(reverse("dashboard:home"))
+
+class list_notes(LoginRequiredMixin, ListView):
+
+    model = models.notes
+    template_name = 'dashboard/list_notes.html'
+    
+    def get_queryset(self, *args, **kwargs):
+        queryset =  super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['notes'] = self.get_queryset(**kwargs)
+        return context

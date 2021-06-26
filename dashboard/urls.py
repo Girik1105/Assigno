@@ -16,4 +16,5 @@ urlpatterns = [
     # path('dashboard/category/delete/<pk>/', views.delete_categories.as_view() , name='category-delete'),
 
     path('dashboard/notes/create/', views.create_notes.as_view() , name='notes-create'),
+    path('dashboard/notes/list/', views.list_notes.as_view() , name='notes-list'),
 ]

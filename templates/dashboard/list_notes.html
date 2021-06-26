@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block dashboard_sections %}
+          
+
+<div class="my_container_for_assignment_list">
+
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
+
+
+<div class="ass_list">
+  <div class="container">
+      {% for item in notes  %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">{{ item.body|safe }}</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+
+<div class="home-logo">
+  <img class="home-logo-image" src="{% static 'images/logo/logo.png' %}" alt="">
+</div>
+
+<div class="right-panel">
+    <a class="btn btn-primary primary-btns" href="{% url 'dashboard:assignment-create' %}">Add Assignments</a> <br>
+    <a class="btn btn-primary primary-btns" href="{% url 'dashboard:notes-create' %}">Add Notes</a> <br>
+    <a class="btn btn-primary primary-btns" href="#">Add Reminders</a><br>
+</div>
+
+
+</div>
+
+
+
+{% endblock dashboard_sections %}
