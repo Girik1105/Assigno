@@ -16,30 +16,7 @@
     <body>
         <div class="my_container">
             
-            <div class="navbar">
-               
-            <div class="navbar_logo">
-                <img src="{% static 'images/company_logo.jpg' %}" width="50" alt="">
-                <span class="navbar_logo_name">OUR COMPANY</span>
-            </div>
-               
-            <div class="searchbar">
-                <form action="#">
-                    <input type="text" placeholder="search" name="q">
-                    <i class="fa fa-search"></i>
-                </form>
-            </div>
-
-            <div class="nav_item">
-        
-            <div class="account_div">
-                <img src="{{ user.profile.profile_picture.url }}"  class="round_image" width="54" alt="">
-                <span class="account_name">{{ user.profile.name }}</span>
-                <span class="account_username">@{{ user.username }}</span>
-            </div>
-            
-        </div>
-        </div>
+        {% include "snippets/navigation.html" %}
             
     
         <div class="sidebar bg">

@@ -5,12 +5,12 @@
 
 <h1>Create Assignment</h1>
 
-<div class="container">
-    <form method="POST", enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="submit">
-    </form>
+<div class="my_container">
+        <form method="POST", enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit">
+        </form>
 </div>
 
 {% endblock maincontent %}
