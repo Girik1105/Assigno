@@ -8,6 +8,8 @@
 
 html{
     font-size: 9px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 
@@ -17,10 +19,10 @@ body
     display:flex;
     justify-content:center;
     align-items: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+}
+
+.enlarge-text{
+    font-size: 1.25rem;
 }
 
 /* For the color of teh box 
@@ -52,6 +54,7 @@ Amd size of the Box*/
 
 .home-logo{
     grid-area: home-logo;
+    
 }
 
 .home-logo-image{
@@ -78,6 +81,7 @@ Amd size of the Box*/
 
 .sub-content{
     grid-area:  sub-content;
+    overflow: auto;
 }
 
 .right-panel{
@@ -218,8 +222,8 @@ Amd size of the Box*/
 
 .navbar .nav_item .account_div .account_username {
     position: absolute;
-    top:4.5rem;
-    left:6.5rem;
+    top:3.5rem;
+    left:5.5rem;
     font-size: 1.5rem;
 }
 
@@ -314,7 +318,7 @@ background:none;
                         "sidebar    ass_list   ass_list    right-panel"
                         "sidebar    ass_list   ass_list    right-panel"
                         "sidebar    ass_list   ass_list    right-panel"
-                        "sidebar    ass_list   ass_list    right-panel";  
+                        "sidebar    ass_list   ass_list    home-logo";  
                         grid-gap: 1rem;
                         padding: 2rem;
                         border-radius: 1em;
@@ -467,6 +471,16 @@ background:none;
                         }
 
 }
+
+@media screen and (max-width: 1024px)
+{
+    html
+    {
+        font-size: 8px;
+    }
+}
+
+
 
 @media screen and (max-width: 968px){
      
@@ -663,6 +677,23 @@ background:none;
                         }
 
 }
+
+@media screen and (max-width: 920px)
+{
+    html
+    {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 840px)
+{
+    html
+    {
+        font-size: 7px;
+    }
+}
+
 
 @media screen and (max-width: 385px){
      

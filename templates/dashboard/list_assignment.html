@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
+{% load static %}
 
 {% block dashboard_sections %}
           
@@ -13,13 +14,42 @@
 
 <div class="ass_list">
   <div class="container">
-    
+    <table class="table table-borderless enlarge-text">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Added</th>
+          <th scope="col">Download</th>
+          <th scope="col">Remove</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in assignments %}
+        <tr>
+          <th>{{ item.title }}</th>
+          <td>{{ item.description }}</td>
+          <td>{{ item.timestamp|date:"d D M Y" }}</td>
+          <td><a href="{{ item.assignment }}" download><i class="fa fa-arrow-circle-o-down enlarge-symbol enlarge-symbol"></i></a></td>
+          <td><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
-<div class="right-panel">
-<a class="btn btn-primary" href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
+
+<div class="home-logo">
+  <img class="home-logo-image" src="{% static 'images/logo/logo.png' %}" alt="">
 </div>
+
+<div class="right-panel">
+    <a class="btn btn-primary primary-btns" href="{% url 'dashboard:assignment-create' %}">Add Assignments</a> <br>
+    <a class="btn btn-primary primary-btns" href="#">Add Reminders</a>
+</div>
+
 
 </div>
 

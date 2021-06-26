@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block dashboard_sections %}
+          
+
+<div class="my_container_for_assignment_list">
+
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
+
+
+<div class="ass_list">
+  <div class="container basic">
+      <h1 class="title">Are you sure?</h1>
+      <p><strong>This action cannot be undone!</strong></p>
+      <p>File Details:</p>
+      <p><strong>Title:</strong> {{ object.title }}</p>
+      <p><strong>Description:</strong> {{ object.description }}</p>
+      <p><strong>File:</strong> {{ object.assignment }}</p>
+      <p><strong>Added on:</strong> {{ object.timestamp }}</p>
+
+      <form method="POST">
+        <input type="submit" class="btn btn-danger primary-btns" value="Delete">
+        {% csrf_token %}
+      </form>
+  
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+{% endblock dashboard_sections %}

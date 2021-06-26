@@ -25,16 +25,18 @@
     <br>
     <span class="stat_title">Note Slides</span> 
     </div>
+
     
     
     <div class="sub-content">
+        <h1 class="title">Recent Assignments</h1>
         {% for item in recent_assignments  %}
-        <div class="card" style="width: 18rem;">
+        <div class="card enlarge-text">
             <div class="card-body">
               <h5 class="card-title">{{ item.title }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ item.assignment }}</h6>
               <p class="card-text">{{ item.description }}</p>
-              <a href="#" class="card-link">Delete</a>
+              <a href="#" class="card-link enlarge-text"><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></a>
               <a href="#" class="card-link">Add Reminder</a>
             </div>
           </div>
@@ -47,13 +49,20 @@
     </div>
 
     <div class="right-panel">
-        {% for item in deadline %}
-        <div>
-            <h1>{{ item.title }}</h1>   
-            <p>{{ item.description }}</p>
-            <p>{{ item.last_date|date:"D, d M Y" }}</p>
-        </div>
-        {% endfor %} 
+        Upcoming Reminders:
+            {% for item in deadline  %}
+            <div class="card enlarge-text">
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.title }}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ item.description }}</h6>
+                  <p class="card-text">{{ item.last_date|date:"D d M Y" }}</p>
+                  <a href="#" class="card-link">Delete</a>
+                  <a href="#" class="card-link">Add Reminder</a>
+                </div>
+              </div>
+              {% empty %}
+              (No Reminders)
+            {% endfor %} 
     </div>        
     
     

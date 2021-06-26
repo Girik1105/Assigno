@@ -32,3 +32,17 @@
     font-size: 5rem;
     margin: .5rem;
 }
+.enlarge-symbol{
+    font-size: 25px;
+    margin:1px;
+}
+.basic{
+    padding: .5rem;
+    font-size: 1.5rem;
+}
+
+.primary-btns{
+    padding: 1rem;
+    font-size: 1.5rem;
+    margin: 1rem;
+}

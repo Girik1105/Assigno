@@ -8,4 +8,5 @@ urlpatterns = [
     path('dashboard/', views.home, name='home'),
     path('dashboard/assignment/create/', views.create_assignments.as_view() , name='assignment-create'),
     path('dashboard/assignment/list/', views.list_assignments.as_view() , name='assignment-list'),
+    path('dashboard/assignment/delete/<pk>/', views.delete_assignment.as_view() , name='assignment-delete'),
 ]

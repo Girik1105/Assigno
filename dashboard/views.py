@@ -14,6 +14,7 @@ from django.views.generic import (CreateView,
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
+
 from . import models
 from . import forms 
 
@@ -27,7 +28,7 @@ def home(request):
     deadlines = models.deadlines.objects.filter(user=request.user)
 
     context = {
-        "recent_assignments": assignments.order_by('-timestamp')[:3],
+        "recent_assignments": assignments.order_by('-timestamp')[:5],
         "assignment_count":assignments.count(),
         "notes_count":notes,
         "deadline_count":deadlines.count(),
@@ -57,7 +58,6 @@ class create_assignments(LoginRequiredMixin, CreateView):
 
 
 class list_assignments(LoginRequiredMixin, ListView):
-    template_name = 'dashboard/assignment_list.html'
     model = models.assignments
     template_name = 'dashboard/list_assignment.html'
 
@@ -71,3 +71,15 @@ class list_assignments(LoginRequiredMixin, ListView):
         context['assignments'] = self.get_queryset(**kwargs)
         return context
 
+
+
+class delete_assignment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'dashboard/assignment_delete.html'
+    model = models.assignments
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:assignment-list')
+
+    def test_func(self):
+        assignment = self.get_object()
+        return assignment.user == self.request.user
