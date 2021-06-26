@@ -1,65 +1,50 @@
 {% extends "base.html" %}
 
-{% block card1block %}
-<span class="stats"> {{ assignment_count }}</span>
-<br>
-<span class="stat_title">assignment count</span> 
-{% endblock card1block %}
+{% block dashboard_sections %}
 
-{% block card2block %}
-<span class="stats"> {{ deadline_count }}</span>
-<br>
-<span class="stat_title">deadlines counts</span> 
-{% endblock card2block %}
+<div class="my_container">
 
-{% block card3block %}
-<span class="stats">{{ notes_count }}</span> <br>
-<span class="stat_title">Notes counts</span> 
-{% endblock card3block %}
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
 
+    <div class="card1">
+    <span class="stats"> {{ assignment_count }}</span>
+    <br>
+    <span class="stat_title">assignment count</span> 
+    </div>
+    
+    <div class="card2">
+    <span class="stats"> {{ deadline_count }}</span>
+    <br>
+    <span class="stat_title">deadlines counts</span> 
+    </div>
+    
+    <div class="card3">
+    <span class="stats">{{ notes_count }}</span> 
+    <br>
+    <span class="stat_title">Notes counts</span> 
+    </div>
+    
+    
+    <div class="sub-content">
+        {% for item in recent_assignments  %}
+            <h1>{{ item }}...</h1>
+        {% endfor %}
+    </div>
+    
+    
+    <div class="right-panel">
+        {% for item in deadline %}
+        <div>
+            <h1>{{ item.title }}</h1>   
+            <p>{{ item.description }}</p>
+            <p>{{ item.last_date|date:"D, d M Y" }}</p>
+        </div>
+        {% endfor %} 
+    </div>        
+    
+    
+</div>
 
-{% block maincontent %}
-    {% for item in recent_assignments  %}
-        <h1>{{ item }}...</h1>
-    {% endfor %}
-{% endblock maincontent %}
-
-{% block sidepanel %}
-{% for item in deadline  %}
-<div>
-    <h1>{{ item.title }}</h1>   
-    <p>{{ item.description }}</p>
-    <p>{{ item.last_date|date:"D, d M Y" }}</p>
-</div>
-<div>
-    <h1>{{ item.title }}</h1>   
-    <p>{{ item.description }}</p>
-    <p>{{ item.last_date|date:"D, d M Y" }}</p>
-</div>
-<div>
-    <h1>{{ item.title }}</h1>   
-    <p>{{ item.description }}</p>
-    <p>{{ item.last_date|date:"D, d M Y" }}</p>
-</div>
-<div>
-    <h1>{{ item.title }}</h1>   
-    <p>{{ item.description }}</p>
-    <p>{{ item.last_date|date:"D, d M Y" }}</p>
-</div>
-<div>
-    <h1>{{ item.title }}</h1>   
-    <p>{{ item.description }}</p>
-    <p>{{ item.last_date|date:"D, d M Y" }}</p>
-</div>
-<div>
-    <h1>{{ item.title }}</h1>   
-    <p>{{ item.description }}</p>
-    <p>{{ item.last_date|date:"D, d M Y" }}</p>
-</div>
-<div>
-    <h1>{{ item.title }}</h1>   
-    <p>{{ item.description }}</p>
-    <p>{{ item.last_date|date:"D, d M Y" }}</p>
-</div>
-{% endfor %}         
-{% endblock sidepanel %}
+{% endblock dashboard_sections %}

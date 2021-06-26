@@ -14,68 +14,10 @@
     
     <!--- For Boxes of size    -->
     <body>
-        <div class="my_container">
-            
-        {% include "snippets/navigation.html" %}
-            
-    
-        <div class="sidebar bg">
-            <ul>
-                <li class="sidebar_dashboard">
-                    <i class="fa fa-home"></i>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <i class="fa fa-file-text-o"></i>
-                    <a href="#">Assignments</a>
-                </li>
-                <li>
-                    <i class="fa fa-bell"></i>
-                    <a href="#">Reminders</a>
-                </li>
-                <li>
-                    <i class="fa fa-pencil-square-o"></i>
-                    <a href="#">Notes</a>
-                </li>
-                <li>
-                    <i class="fa fa-list-ul"></i>
-                    <a href="#">To-Do</a>     
-                </li>
-            </ul>
-        </div>
 
-        <div class="card1">
-            {% block card1block %}
-              
-            {% endblock card1block %}
-        </div>
-
-        <div class="card2">
-            {% block card2block %}
-              
-            {% endblock card2block %}
-        </div>
-
-        <div class="card3 card row-1">
-            {% block card3block %}
-              
-            {% endblock card3block %}
-        </div>
+        {% block dashboard_sections %}{% endblock dashboard_sections %}
         
-        <div class="sub-content">
-            {% block maincontent %}
 
-            {% endblock maincontent %}    
-        </div>
-    
-        <div class="right-panel">
-            {% block sidepanel %}
-              
-            {% endblock sidepanel %}
-        </div>
-
-    </div>
-    
         {% include "snippets/scripts.html" %}
     
 

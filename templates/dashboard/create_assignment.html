@@ -1,16 +1,32 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
 
-{% block maincontent %}
+{% block dashboard_sections %}
+          
 
-<h1>Create Assignment</h1>
+<div class="my_container_for_assignment">
 
-<div class="my_container">
-        <form method="POST", enctype="multipart/form-data">
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
+
+<div class="form-panel">
+    <div class="container">
+        <h1 class="title">Create Assignment</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+        
             {% csrf_token %}
             {% bootstrap_form form %}
-            <input type="submit">
+        
+            <input type="submit" class="round-btn">
+            
         </form>
+    </div>
 </div>
 
-{% endblock maincontent %}
+<div class="right-panel"></div>
+
+</div>
+
+{% endblock dashboard_sections %}

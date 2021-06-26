@@ -1,6 +1,8 @@
 *{
     padding:0;
     margin:0;
+    list-style:none;
+    text-decoration: none;
     font-family:sans-serif;
 }
 
@@ -71,7 +73,7 @@ Amd size of the Box*/
 
 .right-panel{
     grid-area:  right-panel;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .my_container  div{
@@ -81,6 +83,36 @@ Amd size of the Box*/
 .navbar div{
     background: none;
 }
+
+
+/* side bar css */
+
+.sidebar{
+    padding:1rem;
+
+}
+
+.sidebar ul li{
+    padding: 2rem;
+    margin: 1rem 0;
+    font-size: 2rem;
+    border-radius: .8rem;
+}
+
+.sidebar ul li a{
+    text-decoration: none;
+    color: #000;
+    text-transform: capitalize;
+    font-weight: 700;
+
+}
+
+.sidebar .fa{
+    color: #000;
+    font-size: 3rem;
+    padding: .8rem;
+}
+
 
 /* Navbar CSS */
 .my_container .navbar{
@@ -175,3 +207,148 @@ Amd size of the Box*/
     font-size: 1.5rem;
 }
 
+.my_container_for_assignment
+{
+    display: grid;
+    grid-template-columns:0.6fr 1fr 1fr 1fr;
+    grid-template-rows:0.2fr 0.2fr 0.4fr 0.6fr 0.3fr;
+    grid-template-areas:"navbar     navbar       navbar        navbar"
+                        "sidebar    form-panel   form-panel    right-panel"
+                        "sidebar    form-panel   form-panel    right-panel"
+                        "sidebar    form-panel   form-panel    right-panel"
+                        "sidebar    form-panel   form-panel    right-panel";  
+                        grid-gap: 1rem;
+                        padding: 2rem;
+                        border-radius: 1em;
+    width: 95%;            
+    height: 95vh;
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+    border-radius: 1.4rem;
+
+}
+
+.form-panel{
+    grid-area: form-panel;
+}
+
+.my_container_for_assignment  div{
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+}
+
+/* Navbar CSS */
+.my_container_for_assignment .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: .8rem 2.5rem;
+    margin-top: .8rem;
+}
+
+.my_container_for_assignment .navbar_logo{
+    display:flex;
+    align-items:center;
+}
+
+.my_container_for_assignment .navbar_logo .navbar_logo_name {
+    font-size: 2.8rem;
+    margin-left: 1rem;
+    text-shadow: 1px 1px 1px rgba(16, 16, 16, .1),
+                 1px 2px 1px rgba(16, 16, 16, .1),
+                 1px 3px 1px rgba(16, 16, 16, .1),
+                 1px 4px 1px rgba(16, 16, 16, .1),
+                 1px 5px 1px rgba(16, 16, 16, .1);
+}
+
+
+.my_container_for_assignment .navbar_logo img {
+    width: 4em;
+    height: 4em;
+    border-radius:100%;
+    animation: rotate 7s linear infinite;
+}
+
+.my_container_for_assignment .navbar div{
+background:none;
+}
+
+
+
+.form-panel input{
+    font-size: 2rem;
+}
+
+.form-panel label{
+    font-size: 2rem;
+    padding-top:2rem;
+}
+
+.increase-text{
+    font-size: 2rem;
+}
+
+
+
+
+.my_container_for_assignment_list
+{
+    display: grid;
+    grid-template-columns:0.6fr 1fr 1fr 1fr;
+    grid-template-rows:0.2fr 0.2fr 0.4fr 0.6fr 0.3fr;
+    grid-template-areas:"navbar     navbar       navbar        navbar"
+                        "sidebar    ass_list   ass_list    right-panel"
+                        "sidebar    ass_list   ass_list    right-panel"
+                        "sidebar    ass_list   ass_list    right-panel"
+                        "sidebar    ass_list   ass_list    right-panel";  
+                        grid-gap: 1rem;
+                        padding: 2rem;
+                        border-radius: 1em;
+    width: 95%;            
+    height: 95vh;
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+    border-radius: 1.4rem;
+
+}
+
+.ass_list{
+    grid-area: ass_list;
+}
+
+.my_container_for_assignment_list  div{
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+}
+
+/* Navbar CSS */
+.my_container_for_assignment_list .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: .8rem 2.5rem;
+    margin-top: .8rem;
+}
+
+.my_container_for_assignment_list .navbar_logo{
+    display:flex;
+    align-items:center;
+}
+
+.my_container_for_assignment_list .navbar_logo .navbar_logo_name {
+    font-size: 2.8rem;
+    margin-left: 1rem;
+    text-shadow: 1px 1px 1px rgba(16, 16, 16, .1),
+                 1px 2px 1px rgba(16, 16, 16, .1),
+                 1px 3px 1px rgba(16, 16, 16, .1),
+                 1px 4px 1px rgba(16, 16, 16, .1),
+                 1px 5px 1px rgba(16, 16, 16, .1);
+}
+
+
+.my_container_for_assignment_list .navbar_logo img {
+    width: 4em;
+    height: 4em;
+    border-radius:100%;
+    animation: rotate 7s linear infinite;
+}
+
+.my_container_for_assignment_list .navbar div{
+background:none;
+}

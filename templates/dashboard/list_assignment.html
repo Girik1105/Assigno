@@ -1,12 +1,30 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
 
-{% block maincontent %}
+{% block dashboard_sections %}
+          
 
-<h1>Your Assignment</h1>
+<div class="my_container_for_assignment_list">
 
-{% for item in assignments  %}
-  <h1>{{item.description}}</h1>
-{% endfor %}
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
 
-{% endblock maincontent %}
+
+<div class="ass_list">
+  <div class="container">
+    {% for item in assignments %}
+      <h1>{{ item }}</h1>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="right-panel">
+<a class="btn btn-primary" href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
+</div>
+
+</div>
+
+
+
+{% endblock dashboard_sections %}

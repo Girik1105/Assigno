@@ -66,11 +66,14 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    'crispy_forms',
     'bootstrap4',
     'ckeditor',
 
     'dashboard',
 ]
+
+crispy_template_pack ='uni_form'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
