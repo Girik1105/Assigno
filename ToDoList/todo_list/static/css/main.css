@@ -1,0 +1,47 @@
+#logo{
+    }
+
+    .rightstand{
+        padding-right: 20px;
+    }
+    .card1{
+        background-image: linear-gradient(to bottom right, #4640a7, black);
+        color: white;
+        padding: 7px;
+        text-align: center;
+        border-radius: 15px;
+    }
+    .floatL{
+        float: left
+    }
+    .toppad{
+        padding-top: 10px;
+    }
+    .fsize{
+        font-size: 27px;
+    }
+    .leftstand{
+        padding-left: 20px;
+    }
+    .floatR{
+        float: right
+    }
+    .epads{
+        background-color: #ebeff5;
+        border-radius: 15px;
+        padding: 7px;
+    }
+    .eepads{
+        padding-left: 200px;
+        padding-right: 200px;
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+    .maincard{
+        background-color: #4640a7;
+    }
+    .padofpads{
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-bottom: 5px;
+    }
