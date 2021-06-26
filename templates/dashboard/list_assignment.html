@@ -21,6 +21,7 @@
           <th scope="col">Description</th>
           <th scope="col">Added</th>
           <th scope="col">Download</th>
+          <th scope="col">Edit</th>
           <th scope="col">Remove</th>
 
         </tr>
@@ -32,6 +33,7 @@
           <td>{{ item.description }}</td>
           <td>{{ item.timestamp|date:"d D M Y" }}</td>
           <td><a href="{{ item.assignment }}" download><i class="fa fa-arrow-circle-o-down enlarge-symbol enlarge-symbol"></i></a></td>
+          <td><a href="{% url 'dashboard:assignment-update' pk=item.pk %}"><i class="fa fa-pencil enlarge-symbol"></i></a></td>
           <td><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
         </tr>
         {% endfor %}
@@ -47,7 +49,7 @@
 
 <div class="right-panel">
     <a class="btn btn-primary primary-btns" href="{% url 'dashboard:assignment-create' %}">Add Assignments</a> <br>
-    <a class="btn btn-primary primary-btns" href="#">Add Reminders</a>
+    <a class="btn btn-primary primary-btns" href="#">Add Reminders</a><br>
 </div>
 
 

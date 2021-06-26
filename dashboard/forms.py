@@ -12,4 +12,9 @@ class create_assignments_form(forms.ModelForm):
     
     class Meta:
         model = models.assignments
-        fields = ('title','assignment', 'description', 'categories')
+        fields = ('title','assignment', 'description',)
+
+class create_note_form(forms.ModelForm):
+    class Meta:
+        model = models.notes
+        fields = ('body',)

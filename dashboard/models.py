@@ -46,7 +46,7 @@ class assignments(models.Model):
     categories = models.ManyToManyField(categories, related_name="assignment_in_category",blank=True)
 
     def __str__(self):
-        return self.user.usernametitle
+        return self.title
 
 class notes(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)

@@ -57,6 +57,21 @@ class create_assignments(LoginRequiredMixin, CreateView):
             form = forms.Create_assignments_form
 
 
+class update_assignments(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
+    model = models.assignments
+    template_name = 'dashboard/create_category.html'
+    form_class = forms.create_assignments_form
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.save()
+        return redirect(reverse('dashboard:assignment-list'))
+
+    def test_func(self):
+        assignment = self.get_object()
+        return assignment.user == self.request.user
+
+
 class list_assignments(LoginRequiredMixin, ListView):
     model = models.assignments
     template_name = 'dashboard/list_assignment.html'
@@ -83,3 +98,44 @@ class delete_assignment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         assignment = self.get_object()
         return assignment.user == self.request.user
+
+# class create_categories(LoginRequiredMixin, CreateView):
+#     model = models.categories 
+#     form_class = forms.create_category_form
+#     template_name = 'dashboard/create_category.html'
+
+#     def post(self, request, *args, **kwargs):
+#         form = forms.create_category_form(request.POST, request.FILES)
+#         if form.is_valid():
+#             form = form.save(commit=False)
+#             form.user = self.request.user
+#             form.save() 
+    
+#             return redirect(reverse("dashboard:home"))
+        
+#         else:
+#             form = forms.Create_category_form
+
+# class delete_categories(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+#     template_name = 'dashboard/category_delete.html'
+#     model = models.categories
+
+#     def get_success_url(self):
+#         return reverse_lazy('dashboard:assignment-list')
+
+#     def test_func(self):
+#         category = self.get_object()
+#         return category.user == self.request.user
+
+
+class create_notes(LoginRequiredMixin, CreateView):
+
+    model = models.notes
+    template_name = 'dashboard/create_notes.html'
+    form_class = forms.create_note_form
+
+    def post(self, request):
+        form = forms.create_note_form(request.POST)
+        form.instance.user = self.request.user
+        form.save()
+        return redirect(reverse("dashboard:home"))
