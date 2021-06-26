@@ -22,14 +22,16 @@ from . import forms
 @login_required
 def home(request):
 
-    assignments = models.assignments.objects.filter(user=request.user).count()
+    assignments = models.assignments.objects.filter(user=request.user)
     notes = models.notes.objects.filter(user=request.user).count()
-    deadlines = models.deadlines.objects.filter(user=request.user).count()
+    deadlines = models.deadlines.objects.filter(user=request.user)
 
     context = {
-        "assignment_count":assignments,
+        "recent_assignments": assignments.order_by('-timestamp')[:3],
+        "assignment_count":assignments.count(),
         "notes_count":notes,
-        "deadline_count":deadlines,
+        "deadline_count":deadlines.count(),
+        "deadline":deadlines.order_by('last_date')[:3],
     }
 
     return render(request, 'dashboard/home.html', context)

@@ -15,10 +15,10 @@ body
     display:flex;
     justify-content:center;
     align-items: center;
-    min-height: 100vh;
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-size:cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 /* For the color of teh box 
@@ -32,7 +32,8 @@ Amd size of the Box*/
     grid-template-areas:"navbar     navbar         navbar        navbar"
                         "sidebar    card1         card2          card3"
                         "sidebar    sub-content   sub-content    right-panel"
-                        "sidebar    sub-content   sub-content    right-panel";
+                        "sidebar    sub-content   sub-content    right-panel"
+                        "sidebar    sub-content   sub-content    right-panel";  
                         grid-gap: 1rem;
                         padding: 2rem;
                         border-radius: 1em;
@@ -51,10 +52,6 @@ Amd size of the Box*/
     grid-area: sidebar;
 }
 
-.header{
-    grid-area:  header;
-}
-
 .card1{
     grid-area:  card1;
     text-align: center;
@@ -70,6 +67,11 @@ Amd size of the Box*/
 
 .sub-content{
     grid-area:  sub-content;
+}
+
+.right-panel{
+    grid-area:  right-panel;
+    overflow: scroll;
 }
 
 .my_container  div{
@@ -123,14 +125,53 @@ Amd size of the Box*/
 }
 
 .navbar .searchbar input {
-    padding: .8rem 12rem .8rem 2rem;
+    padding: 1rem 14rem 1.5rem 2rem;
     border: none;
+    font-size: 2rem;
     outline: none;
     border-radius: 3rem;
     transition:0.7s;
 }
 .navbar .searchbar input:focus{
-    background:rgb(255, 42, 209);
-    color:#fff;
-    padding: .8rem 23rem .8rem 2rem;
+    color: rgba(143, 5, 255, 0.781);
+    padding: .8rem 23rem 1.75rem 2rem;
 }
+
+.navbar .searchbar .fa{
+    position: absolute;
+    font-size: 2.7rem;
+    top:1.5rem;
+    right: 1.5rem;   
+}
+
+
+.navbar .nav_item .nav_icons ul li .fa:hover {
+    transform: scale(1.2) rotate(360deg);
+    color: #33ccff;
+    background: transparent;
+}
+
+.navbar .nav_item .account_div{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .nav_item .account_div img{
+    border-radius: 50%;
+}
+
+.navbar .nav_item .account_div .account_name {
+    text-transform: capitalize;
+    margin:0 .6rem;
+    font-size:2rem;
+    font-weight: 700;
+}
+
+.navbar .nav_item .account_div .account_username {
+    position: absolute;
+    top:4.5rem;
+    left:6.5rem;
+    font-size: 1.5rem;
+}
+
