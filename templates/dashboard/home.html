@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block dashboard_sections %}
 
 <div class="my_container">
@@ -29,11 +29,23 @@
     
     <div class="sub-content">
         {% for item in recent_assignments  %}
-            <h1>{{ item }}...</h1>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.assignment }}</h6>
+              <p class="card-text">{{ item.description }}</p>
+              <a href="#" class="card-link">Delete</a>
+              <a href="#" class="card-link">Add Reminder</a>
+            </div>
+          </div>
         {% endfor %}
     </div>
     
     
+    <div class="home-logo">
+        <img class="home-logo-image" src="{% static 'images/logo/logo.png' %}" alt="">
+    </div>
+
     <div class="right-panel">
         {% for item in deadline %}
         <div>

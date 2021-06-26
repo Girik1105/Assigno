@@ -35,7 +35,7 @@ Amd size of the Box*/
                         "sidebar    card1         card2          card3"
                         "sidebar    sub-content   sub-content    right-panel"
                         "sidebar    sub-content   sub-content    right-panel"
-                        "sidebar    sub-content   sub-content    right-panel";  
+                        "sidebar    sub-content   sub-content    home-logo";  
                         grid-gap: 1rem;
                         padding: 2rem;
                         border-radius: 1em;
@@ -49,6 +49,15 @@ Amd size of the Box*/
 .navbar{
     grid-area:  navbar;
 } 
+
+.home-logo{
+    grid-area: home-logo;
+}
+
+.home-logo-image{
+    height: 35rem;
+    width: 100%;
+}
 
 .sidebar{
     grid-area: sidebar;
@@ -111,6 +120,13 @@ Amd size of the Box*/
     color: #000;
     font-size: 3rem;
     padding: .8rem;
+}
+
+
+.row-1{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
 
-ul
+.sidebar ul
 {
     position: relative;
     width: 270px;
@@ -8,7 +8,7 @@ ul
     padding: 10px;
     box-sizing: border-box;
 }
-ul li
+.sidebar ul li
 {
     display: flex;
     background: rgba(255, 255, 255, .1);
@@ -17,43 +17,43 @@ ul li
     margin: 5px 0;
     transition: 0.5s;
 }
-ul li:nth-child(1)
+.sidebar ul li:nth-child(1)
 {
     background: rgba(255,   255, 255,.6);
 }
 
-ul li:nth-child(2)
+.sidebar ul li:nth-child(2)
 {
     background: rgba(255,   255, 255,.4);
 }
 
-ul li:nth-child(3)  
+.sidebar ul li:nth-child(3)  
 {
     background: rgba(255,   255, 255,.2);
 }
-ul li span:nth-child(1)
+.sidebar ul li span:nth-child(1)
 {
     width: 30px;
 }
-ul li span:nth-child(2)
+.sidebar ul li span:nth-child(2)
 {
     width: 200px;
 }
-ul li span:nth-child(3)
+.sidebar ul li span:nth-child(3)
 {
     width: 100px;
     text-align: right;
 }
-ul li span:nth-child(4)
+.sidebar ul li span:nth-child(4)
 {
     width: 100px;
     text-align: right;
     
 }
-ul li:hover
+.sidebar ul li:hover
 {
-    transform: scale(1.5);
-    background: #02e3f3;
+    transform: scale(1.25);
+    background: #f302f3;
     color:#fff;
 }
 

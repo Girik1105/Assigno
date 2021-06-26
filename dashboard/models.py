@@ -13,7 +13,7 @@ class user_profile(models.Model):
     user = models.OneToOneField(User, primary_key=True, related_name='profile', on_delete=models.CASCADE)
     name = models.CharField(max_length = 150, blank = True, null = True)
 
-    profile_picture = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.jpg', blank=True)
+    profile_picture = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.png', blank=True)
     background = models.ImageField(upload_to='uploads/profile_background', default='uploads/profile_background/default.jpg', blank=True)
 
     GENDER_CHOICES = (
@@ -39,6 +39,7 @@ class categories(models.Model):
 class assignments(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     assignment = models.FileField(upload_to='uploads/student_assignments', blank=True, null=True) # REMEMBER TO REMOVE BLANK AND NULL
+    title = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
