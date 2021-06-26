@@ -1,28 +1,71 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
+    <head>
 
-<head>
+        {% include "snippets/head.html" %}
 
-    {% include "snippets/head.html" %}
+        <title>
+            {% block title %}
+              
+            {% endblock title %}
+        </title>
+    </head>
+    
+    <!--- For Boxes of size    -->
+    <body>
+        <div class="my_container">
+            
+            <div class="navbar">
+               
+                <div class="navbar_logo">
+                    <img src="{% static 'images/company_logo.jpg' %}" width="50" alt="">
+                    <span class="navbar_logo_name">OUR COMPANY</span>
+                </div>
+               
 
-    <title>
-        {% block title %}
-          
-        {% endblock title %}
-    </title>
+            <div class="searchbar">
+                <form action="#">
+                    <input type="text" placeholder="search" name=q>
+                    <i class="fa fa search"></i>
+                </form>
+            </div>
 
-</head>
+            <div class="nav_item">
+                <div class="nav_icons"></div>
+                <ul>
+                    <li class="fa fa-envelope"></li>
+                    <li class="fa fa-envelope"></li>
+                    <li class="fa fa-envelope"></li>
+                    <li class="fa fa-envelope"></li>
+                    <li class="fa fa-envelope"></li>
+                </ul>
+            </div>
 
-<body>
+            <div class="account_logo">
+                <img src="{{ user.profile.profile_picture.url }}"  class="round_image" width="36" alt="">
+                <span class="account_name">@{{ user.username }}</span>
+            </div>
 
-    {% block maincontent %}
-      
-    {% endblock maincontent %}
+        </div>
+            
+    
+        <div class="sidebar">
 
-    {% include "snippets/scripts.html" %}
+        </div>
+        
+        {% block maincontent %}
 
+        {% endblock maincontent %}
+        
+        </div>
+        
 
+    
+        {% include "snippets/scripts.html" %}
+    
 
-</body>
-</html>
+    </body>
+    </html>
+    
+        

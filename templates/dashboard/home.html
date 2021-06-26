@@ -2,17 +2,25 @@
 
 {% block maincontent %}
 
-<h1>Hi there @{{ user.username }}</h1>
+<div class="card1">
+    <span class="stats"> {{ assignment_count }}</span>
+    <br>
+    <span class="stat_title">assignment count</span> 
+</div>
 
-{% if user.is_authenticated %}
-welcome @{{ user.username }}
+<div class="card2">
+    <span class="stats"> {{ deadline_count }}</span>
+    <br>
+    <span class="stat_title">deadlines counts</span> 
+</div>
 
-<ul>
-    <li>assignment count {{ assignment_count }}</li>
-    <li>deadlines counts {{ deadline_count }}</li>
-    <li>Notes counts {{ notes_count }}</li>
-</ul>
+<div class="card3">
+     <span class="stats">{{ notes_count }}</span> <br>
+     <span class="stat_title">Notes counts</span> 
+</div>
 
-{% endif %}
+<div class="sub-content">
+
+</div>
 
 {% endblock maincontent %}

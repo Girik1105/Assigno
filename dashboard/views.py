@@ -68,3 +68,4 @@ class list_assignments(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs) 
         context['assignments'] = self.get_queryset(**kwargs)
         return context
+

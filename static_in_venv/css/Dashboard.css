@@ -1,0 +1,136 @@
+*{
+    padding:0;
+    margin:0;
+    font-family:sans-serif;
+}
+
+html{
+    font-size: 9px;
+}
+
+
+/* for background*/
+body
+{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 100vh;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+/* For the color of teh box 
+Outline pf the white box 
+Amd size of the Box*/ 
+.my_container
+{
+    display: grid;
+    grid-template-columns:0.6fr 1fr 1fr 1fr;
+    grid-template-rows:0.2fr 0.2fr 0.4fr 0.6fr 0.3fr;
+    grid-template-areas:"navbar     navbar         navbar        navbar"
+                        "sidebar    card1         card2          card3"
+                        "sidebar    sub-content   sub-content    right-panel"
+                        "sidebar    sub-content   sub-content    right-panel";
+                        grid-gap: 1rem;
+                        padding: 2rem;
+                        border-radius: 1em;
+    width: 95%;            
+    height: 95vh;
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+    border-radius: 1.4rem;
+
+}
+
+.navbar{
+    grid-area:  navbar;
+} 
+
+.sidebar{
+    grid-area: sidebar;
+}
+
+.header{
+    grid-area:  header;
+}
+
+.card1{
+    grid-area:  card1;
+    text-align: center;
+}
+.card2{
+    grid-area:  card2;
+    text-align: center;
+}
+.card3{
+    grid-area:  card3;
+    text-align: center;
+}
+
+.sub-content{
+    grid-area:  sub-content;
+}
+
+.my_container  div{
+    background: linear-gradient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+}
+
+.navbar div{
+    background: none;
+}
+
+/* Navbar CSS */
+.my_container .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: .8rem 2.5rem;
+    margin-top: .8rem;
+}
+
+.my_container .navbar_logo{
+    display:flex;
+    align-items:center;
+}
+
+.my_container .navbar_logo .navbar_logo_name {
+    font-size: 2.8rem;
+    margin-left: 1rem;
+    text-shadow: 1px 1px 1px rgba(16, 16, 16, .1),
+                 1px 2px 1px rgba(16, 16, 16, .1),
+                 1px 3px 1px rgba(16, 16, 16, .1),
+                 1px 4px 1px rgba(16, 16, 16, .1),
+                 1px 5px 1px rgba(16, 16, 16, .1);
+}
+
+
+.my_container .navbar_logo img {
+    width: 4em;
+    height: 4em;
+    border-radius:100%;
+    animation: rotate 7s linear infinite;
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(-360deg);
+    }    
+}
+
+.navbar .searchbar{
+    position: relative;
+}
+
+.navbar .searchbar input {
+    padding: .8rem 12rem .8rem 2rem;
+    border: none;
+    outline: none;
+    border-radius: 3rem;
+    transition:0.7s;
+}
+.navbar .searchbar input:focus{
+    background:rgb(255, 42, 209);
+    color:#fff;
+    padding: .8rem 23rem .8rem 2rem;
+}
