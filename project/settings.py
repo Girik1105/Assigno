@@ -37,15 +37,29 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = []
 
 
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 # Application definition
+
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
+
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.messages',
     'django.contrib.sites',
 
     'allauth',
@@ -53,6 +67,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'bootstrap4',
+    'ckeditor',
+
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +87,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

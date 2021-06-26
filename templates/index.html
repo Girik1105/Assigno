@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Hi there how you do?</h1>
+
+{% if user.is_authenticated %}
+welcome @{{ user.username }}
+<a href="{% url 'dashboard:home' %}">Go to dashboard!</a>      
+{% endif %}
+
+{% endblock content %}
