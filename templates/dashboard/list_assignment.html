@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block maincontent %}
+
+<h1>Your Assignment</h1>
+
+{% for item in assignments  %}
+  <h1>{{item.description}}</h1>
+{% endfor %}
+
+{% endblock maincontent %}

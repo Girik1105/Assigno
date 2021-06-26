@@ -38,11 +38,11 @@ class categories(models.Model):
 
 class assignments(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    assignment = models.FileField(upload_to='uploads/student_assignments')
-    description = models.TextField()
+    assignment = models.FileField(upload_to='uploads/student_assignments', blank=True, null=True) # REMEMBER TO REMOVE BLANK AND NULL
+    description = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    categories = models.ManyToManyField(categories, related_name="assignment_in_category")
+    categories = models.ManyToManyField(categories, related_name="assignment_in_category",blank=True)
 
     def __str__(self):
         return self.description[:15]
@@ -52,12 +52,13 @@ class notes(models.Model):
     body = RichTextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    categories = models.ManyToManyField(categories,related_name="notes_in_category")
+    categories = models.ManyToManyField(categories,related_name="notes_in_category",blank=True)
 
     def __str__(self):
         return self.user.username
 
 class deadlines(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=150)
     description = models.TextField(blank=True, null=True)
     assignments = models.ForeignKey(assignments, blank=True, null=True, on_delete = models.CASCADE)
@@ -68,6 +69,7 @@ class deadlines(models.Model):
 
     def __str__(self):
         return self.title
+
 
 
 @receiver(post_save, sender=User)

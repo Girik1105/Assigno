@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+
+<h1>Hi there @{{ user.username }}</h1>
+
+{% if user.is_authenticated %}
+welcome @{{ user.username }}
+
+<ul>
+    <li>assignment count {{ assignment_count }}</li>
+    <li>deadlines counts {{ deadline_count }}</li>
+    <li>Notes counts {{ notes_count }}</li>
+</ul>
+
+{% endif %}
+
+{% endblock maincontent %}
