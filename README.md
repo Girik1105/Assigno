@@ -1,4 +1,4 @@
-# **ASSIGNO**
+# **ASSIGNO** - Unite Your Notes
 ## Inspiration
 -  We all have been affected by the current COVID-19 pandemic. Due to this unfortunate situation , students have shifted to online classes and adults have shifted online workspace Digital innovation is expected to have many positive outcomes in the future of education
 - As High School trying to to adjust to online classes and exams , the problem we face is not able to manage our assignment and notes which leads to a unorganized notes and loss of notes .Ultimately leading to a chaotic situation during Exams
