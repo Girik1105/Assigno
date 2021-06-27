@@ -1,0 +1,268 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    max-width:2000px;
+    margin: auto;
+  
+
+}
+
+*{
+    color: black;
+    animation: illus 1.5s ease;  
+}
+
+@keyframes illus {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+a:hover{
+    color: white;
+}
+.navbar navbar-expand-lg navbar-light bg-light{
+    margin: 0px;
+    position: relative;
+    top:0;
+}
+title{
+    font-weight: 500;
+}
+
+body{
+    margin: 0;
+    padding: 0;    
+}
+
+
+.navbar-brand{
+    font-family: 'Righteous', cursive;
+    font-size:30px;
+    margin-top:1.7%;
+}
+
+.navbar-nav{   
+    margin-top: 1rem;
+    margin-left: 650px;
+    position: relative;
+    
+ }
+
+ .navbar-nav a{
+ 
+     display: flex;
+     justify-content: space-between;
+     margin-left: 50px;
+     padding: 5px 100px;
+    font-family: 'Balsamiq Sans', cursive;
+    align-items: center;
+ }
+.navbar-nav a:hover{
+    text-decoration:underline ;
+}
+
+.Logo{
+    border-radius:50px;
+    width:50px;
+    height:50px;
+    margin-right: 10px;
+    
+}
+.box-container{
+    
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-left: 100vh;
+
+}
+.box-container{
+    align-items:center;
+    margin-right:850px ;
+    margin-top:50px;
+    margin-left:70%;
+    background-color: white; 
+    animation:fader 2s ease;   
+}
+@keyframes fader {
+    from {
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+.box-h1{
+    font-size:70px;
+    font-weight:bold;
+    color:#212529;
+    margin-left: 200px;
+}
+.box-h4{
+    font-size: 20px;
+    font-weight:300;
+    color: #212529;
+    position: relative;
+    bottom:-160px;
+    left:-384px;
+    width: 400px;     
+}
+#btn-primary{
+    position: relative;
+    left: 40px;
+    top: 0.5rem;
+    border-radius:40px;
+    max-width: 100%;
+    
+}
+.new-1{
+    position: relative;  
+    margin-left: 50%;
+    top: -15em;
+   
+}
+svg{
+    max-width: 100%;
+    
+}
+#Hand{
+    animation: header 1.7s ease-out infinite alternate;
+   
+    transform-origin: left top;
+    transform-box: fill-box;
+}
+@keyframes header {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(-10deg);
+    }
+}
+#Head{
+    animation: header1 1.7s ease infinite alternate;
+    transform-origin: left top;
+    transform-box: fill-box;
+}
+@keyframes header1 {
+    from {
+        transform: translateX(0px);
+    }
+    to{
+        transform: translateX(10px);
+    }
+}
+
+@media (max-width:500px){
+    svg{
+        
+        max-width: 90%;
+        position: relative;
+        top:25ch;
+        right:45%;
+        
+    }
+}
+
+.footer{
+	background-color: #24262b;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #185ADB;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+    font-family: 'Balsamiq Sans', cursive;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 10px;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+    position: relative;
+}
+@media (max-width:500px){
+.footer-col .social-links a{
+        
+    line-height: 40px;   
+    }
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
