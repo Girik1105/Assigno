@@ -20,12 +20,6 @@ class create_note_form(forms.ModelForm):
         fields = ('title', 'body',)
 
 class create_deadline_form(forms.ModelForm):
-    
-    def __init__(self, *args, **kwargs):
-        request = kwargs.pop('request')
-        assignments = models.assignments.objects.filter(user=request.user)
-        super(create_deadline_form, self).__init__(*args, **kwargs)
-        self.fields['assignments'].queryset = assignments
 
     class Meta:
         model = models.deadlines
@@ -34,3 +28,8 @@ class create_deadline_form(forms.ModelForm):
         "last_date": "Add a Reminder (yyyy-mm-dd)"
         }
 
+    def __init__(self, *args, **kwargs):
+        usr = kwargs.pop('usr')
+        assignments = models.assignments.objects.filter(user=usr)
+        super(create_deadline_form, self).__init__(*args, **kwargs)
+        self.fields['assignments'].queryset = assignments

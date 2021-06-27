@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, request
 
 from django.views.generic import (CreateView, 
                                   DetailView, 
@@ -197,18 +197,17 @@ class create_deadlines(LoginRequiredMixin, CreateView):
     template_name = 'dashboard/create_deadlines.html'
     form_class = forms.create_deadline_form
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return redirect(reverse('dashboard:reminders-list'))
+
     def get_form_kwargs(self, **kwargs):
         kwargs = super(create_deadlines, self).get_form_kwargs(**kwargs)
         kwargs.update({
-            "request":self.request,
+            "usr":self.request.user,
         })
         return kwargs
-
-    def post(self, request):
-        form = forms.create_deadline_form(request.POST)
-        form.instance.user = self.request.user
-        form.save()
-        return redirect(reverse("dashboard:reminders-list"))
 
 
 class list_deadlines(LoginRequiredMixin, ListView):
