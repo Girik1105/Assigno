@@ -197,6 +197,13 @@ class create_deadlines(LoginRequiredMixin, CreateView):
     template_name = 'dashboard/create_deadlines.html'
     form_class = forms.create_deadline_form
 
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(create_deadlines, self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "request":self.request,
+        })
+        return kwargs
+
     def post(self, request):
         form = forms.create_deadline_form(request.POST)
         form.instance.user = self.request.user
