@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block dashboard_sections %}
+          
+
+<div class="my_container_for_assignment_list">
+
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
+
+
+<div class="ass_list">
+  <div class="container">
+      <h1 class="title">All Tasks</h1>
+      <a href="{% url 'dashboard:task-create' %}"><button class="btn btn-primary primary-btns">ADD TASKS</button></a>
+        <table class="leftstand">
+            <tr class="leftstand">
+                <th class="padofpads">Tasks:</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for task in tasks %}
+                {% if task.complete %}
+                <tr class="leftstand basic">
+                    <td class="enlarge-symbol"><strike>{{task.title}}</strike></td>
+                    <td><a href="{% url 'dashboard:task-update' task.id %}"><i class="fa fa-pencil enlarge-symbol"></i></a></td>
+                    <td><a href="{% url 'dashboard:task-delete' task.id %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
+                </tr>            
+                {% else %}
+                <tr class="leftstand basic">
+                    <td class="enlarge-symbol">{{task.title}}</td>
+                    <td><a href="{% url 'dashboard:task-update' task.id %}"><i class="fa fa-pencil enlarge-symbol"></i></a></td>
+                    <td><a href="{% url 'dashboard:task-delete' task.id %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
+                </tr>
+                {% endif %}
+            {% empty %}
+            <h3 class="leftstand">No items in List</h3>
+            {% endfor %}
+        </table>
+  </div>
+</div>
+
+
+<div class="home-logo">
+  <img class="home-logo-image" src="{% static 'images/logo/logo.png' %}" alt="">
+</div>
+
+<div class="right-panel">
+  <ul>
+      <li>
+          <a href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
+      </li>
+      
+      <li>
+          <a href="{% url 'dashboard:notes-create' %}">Add Notes</a>
+      </li>
+       
+      <li>
+          <a href="{% url 'dashboard:reminders-create' %}">Add Reminders</a>
+      </li>
+  </ul>
+</div>
+
+
+</div>
+
+
+
+{% endblock dashboard_sections %}

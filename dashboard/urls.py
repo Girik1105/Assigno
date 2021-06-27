@@ -23,6 +23,11 @@ urlpatterns = [
 
     path('dashboard/reminders/add/', views.create_deadlines.as_view() , name='reminders-create'),
     path('dashboard/reminders/list/', views.list_deadlines.as_view() , name='reminders-list'),
-    # path('dashboard/reminders/update/<pk>/', views.update_deadlines.as_view() , name='reminders-update'),    
-    # path('dashboard/reminders/delete/<pk>/', views.delete_deadlines.as_view() , name='reminders-delete'),
+    path('dashboard/reminders/update/<pk>/', views.update_deadlines.as_view() , name='reminders-update'),    
+    path('dashboard/reminders/delete/<pk>/', views.delete_deadlines.as_view() , name='reminders-delete'),
+
+    path('dashboard/tasks/create/', views.TaskCreate.as_view(), name='task-create'),
+    path('dashboard/tasks/all/', views.TaskList.as_view(), name='task-list'),
+    path('dashboard/tasks/update/<int:pk>/', views.TaskUpdate.as_view(), name='task-update'),
+    path('dashboard/tasks/delete/<int:pk>/', views.TaskDelete.as_view(), name='task-delete'),
 ]

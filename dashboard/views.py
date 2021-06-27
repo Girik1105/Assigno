@@ -218,3 +218,78 @@ class list_deadlines(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs) 
         context['deadlines'] = self.get_queryset(**kwargs)
         return context
+
+class update_deadlines(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
+    model = models.deadlines
+    template_name = 'dashboard/create_deadlines.html'
+    form_class = forms.create_deadline_form
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.save()
+        return redirect(reverse('dashboard:reminders-list'))
+
+    def test_func(self):
+        deadlines= self.get_object()
+        return deadlines.user == self.request.user
+
+class delete_deadlines(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'dashboard/delete_deadlines.html'
+    model = models.deadlines
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:reminders-list')
+
+    def test_func(self):
+        deadlines = self.get_object()
+        return deadlines.user == self.request.user
+
+
+
+
+
+
+
+
+
+
+class TaskList(LoginRequiredMixin, ListView):
+    model = models.Task
+    template_name = 'dashboard/todo/list_todo.html'
+    context_object_name = 'tasks'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(complete=False).count()
+
+        search_input = self.request.GET.get('search-area') or ''
+        if search_input:
+            context['tasks'] = context['tasks'].filter(title__icontains=search_input)
+        context['search_input'] = search_input
+        return context
+
+
+class TaskCreate(LoginRequiredMixin, CreateView):
+    model = models.Task
+    template_name = 'dashboard/todo/create_todo.html'
+    fields = ['title', 'description', ]
+    success_url = reverse_lazy('dashboard:task-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(TaskCreate, self).form_valid(form)
+
+
+class TaskUpdate(LoginRequiredMixin, UpdateView):
+    model = models.Task
+    template_name = 'dashboard/todo/update_todo.html'
+    fields = ['title', 'description', 'complete']
+    success_url = reverse_lazy('dashboard:task-list')
+
+
+class TaskDelete(LoginRequiredMixin,  DeleteView):
+    model = models.Task
+    template_name = 'dashboard/todo/delete_todo.html'
+    context_object_name = 'task'
+    success_url = reverse_lazy('dashboard:task-list')

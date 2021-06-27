@@ -37,7 +37,7 @@
               <h6 class="card-subtitle mb-2 text-muted basic">{{ item.assignment }}</h6>
               <p class="card-text">{{ item.description }}</p>
               <a href="#" class="card-link enlarge-text"><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></a>
-              <a href="#" class="card-link">Add Reminder</a>
+              
             </div>
           </div>
         {% endfor %}
@@ -58,8 +58,7 @@
                   <h5 class="card-title">{{ item.title }}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{ item.description }}</h6>
                   <p class="card-text">{{ item.last_date|date:"D d M Y" }}</p>
-                  <a href="#" class="card-link">Delete</a>
-                  <a href="#" class="card-link">Add Reminder</a>
+
                 </div>
               </div>
               {% empty %}

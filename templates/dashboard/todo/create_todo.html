@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block dashboard_sections %}
+          
+
+<div class="my_container_for_assignment">
+
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
+
+<div class="form-panel">
+    <div class="container">
+        <h1 class="title">Add Tasks</h1>
+
+        <form method="POST" class="enlarge-symbol" enctype="multipart/form-data">
+        
+            {% csrf_token %}
+            {% bootstrap_form form %}
+        
+            <input type="submit" class="round-btn">
+            
+        </form>
+    </div>
+</div>
+
+<div class="right-panel">
+    <ul>
+        <li>
+            <a href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
+        </li>
+        
+        <li>
+            <a href="{% url 'dashboard:notes-create' %}">Add Notes</a>
+        </li>
+         
+        <li>
+            <a href="#">Add Reminders</a>
+        </li>
+    </ul>
+</div>
+
+</div>
+
+{% endblock dashboard_sections %}
