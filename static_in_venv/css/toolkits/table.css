@@ -53,7 +53,7 @@
 .sidebar ul li:hover
 {
     transform: scale(1.25);
-    background: #f302f3;
+    background: #00c3ff;
     color:#fff;
 }
 
@@ -122,7 +122,7 @@
 .right-panel ul li:hover
 {
     transform: scale(1.25);
-    background: #f302f3;
+    background: #00c3ff;
     color:#fff;
 }
 
