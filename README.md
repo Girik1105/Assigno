@@ -1,10 +1,10 @@
-#**ASSIGNO**
-##Inspiration
+# **ASSIGNO**
+## Inspiration
 -  We all have been affected by the current COVID-19 pandemic. Due to this unfortunate situation , students have shifted to online classes and adults have shifted online workspace Digital innovation is expected to have many positive outcomes in the future of education
 - As High School trying to to adjust to online classes and exams , the problem we face is not able to manage our assignment and notes which leads to a unorganized notes and loss of notes .Ultimately leading to a chaotic situation during Exams
 - We also face problems doing assignments and submitting before time So we decided to make a website that helps us
 
-##What Assigno Does for A Student?
+## What Assigno Does for A Student?
 - It helps as student organize his **assignments** and **notes**
 - It helps manage deadlines for paper and essays
 - It contains a **To-Do List** and **Reminders**
@@ -37,13 +37,13 @@ Hoping to Grow our discord server
 - Forum Page
 - Doc Tool
 
-##Built With
--css
--django
--django=allauth
--html5
--javascript
--python
--Bootstrap
+## Built With
+- css
+- django
+- django=allauth
+- html5
+- javascript
+- python
+- Bootstrap
 
-##[Try out our Website]()
+## [Try out our Website]()
