@@ -331,6 +331,7 @@ background:none;
 
 .ass_list{
     grid-area: ass_list;
+    overflow: scroll;
 }
 
 .my_container_for_assignment_list  div{
@@ -383,7 +384,7 @@ background:none;
 
    
 
-    .my_container 
+.my_container 
 {
     background: transparent;
     display: grid;
@@ -395,9 +396,9 @@ background:none;
                          "card2"
                          "card3"
                          "right-panel"
+                         "ass_list"
                          "home-logo"
                          "sub-content"
-                         "ass_list"
                          "form-panel";   
                         }
 
@@ -418,54 +419,7 @@ background:none;
                             position: relative;
                         }
 
-                        .togglebtn
-                        {
-                            position: absolute;
-                            top: .2rem;
-                            right: .2rem;
-                            width: 3.3rem;
-                            height: 3.3rem;
-                            background: #000;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
-
-                        .togglebtn:before
-                        {
-                            content: '';
-                            position: absolute;
-                            width: 2rem;
-                            height: .2rem;
-                            background: #fff;
-                            transform: translateY(-6px);
-                            box-shadow: 0 6px 0 #fff;
-                            transition: .3s;
-                        }
-
-                        .togglebtn.active:before
-                        {
-                            transform: translateY(0) rotate(40deg);
-                            box-shadow: 0 0 0 #fff;
-                        }
-
-                        .togglebtn:after
-                        {
-                            content: '';
-                            position: absolute;
-                            width: 2rem;
-                            height: .2rem;
-                            background: #fff;
-                            transform: translateY(6px); 
-                            transition: .3s;
-                        }
-
-                        .togglebtn.active:after
-                        {
-                            transform: translateY(0) rotate(-40deg); 
-                        }
-
-                        .graph
+                        .sub-content
                         {
                             overflow: scroll;
                         }
@@ -491,7 +445,7 @@ background:none;
 
    
 
-    .my_container_for_assignment
+.my_container_for_assignment
 {
     background: transparent;
     display: grid;
@@ -509,7 +463,7 @@ background:none;
                          "form-panel";   
                         }
 
-                        .my_container .navbar
+                        .my_container_for_assignment .navbar
                         {
                             display: flex;
                             flex-direction: column;
@@ -526,52 +480,7 @@ background:none;
                             position: relative;
                         }
 
-                        .togglebtn
-                        {
-                            position: absolute;
-                            top: .2rem;
-                            right: .2rem;
-                            width: 3.3rem;
-                            height: 3.3rem;
-                            background: #000;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
 
-                        .togglebtn:before
-                        {
-                            content: '';
-                            position: absolute;
-                            width: 2rem;
-                            height: .2rem;
-                            background: #fff;
-                            transform: translateY(-6px);
-                            box-shadow: 0 6px 0 #fff;
-                            transition: .3s;
-                        }
-
-                        .togglebtn.active:before
-                        {
-                            transform: translateY(0) rotate(40deg);
-                            box-shadow: 0 0 0 #fff;
-                        }
-
-                        .togglebtn:after
-                        {
-                            content: '';
-                            position: absolute;
-                            width: 2rem;
-                            height: .2rem;
-                            background: #fff;
-                            transform: translateY(6px); 
-                            transition: .3s;
-                        }
-
-                        .togglebtn.active:after
-                        {
-                            transform: translateY(0) rotate(-40deg); 
-                        }
 
                         .graph
                         {
@@ -587,96 +496,50 @@ background:none;
         font-size: 9px;
     }
 
-   
-
     .my_container_for_assignment_list
-{
-    background: transparent;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: .2fr .2fr .3fr .6fr .6fr .6fr .8fr .2fr .4fr .4fr .4fr;
-    grid-template-areas: "navbar"
-                         "sidebar"
-                         "card1"
-                         "card2"
-                         "card3"
-                         "right-panel"
-                         "home-logo"
-                         "sub-content"
-                         "ass_list"
-                         "form-panel";   
-                        }
+    {
+        background: transparent;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: .2fr .2fr .4fr .4fr .4fr .4fr .6fr .4fr .2fr .2fr;
+        grid-template-areas: "navbar"
+                             "sidebar"
+                             "ass_list"
+                             "ass_list"
+                             "ass_list"
+                             "ass_list"
+                             "right-panel"
+                             "home-logo";
+                            }
+    
+                            .my_container_for_assignment_list .navbar
+                            {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 2.5rem;
+                            } 
+                            
+                            .my_container_for_assignment_list .ass_list
+                            {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 2.5rem;
+                            } 
 
-                        .my_container .navbar
-                        {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 2.5rem;
-                        } 
+                            .toggle
+                            {
+                                display: none;
+                            }
+    
+                            .dashboard
+                            {
+                                position: relative;
+                            }
+    
 
-                        .toggle
-                        {
-                            display: none;
-                        }
-
-                        .dashboard
-                        {
-                            position: relative;
-                        }
-
-                        .togglebtn
-                        {
-                            position: absolute;
-                            top: .2rem;
-                            right: .2rem;
-                            width: 3.3rem;
-                            height: 3.3rem;
-                            background: #000;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
-
-                        .togglebtn:before
-                        {
-                            content: '';
-                            position: absolute;
-                            width: 2rem;
-                            height: .2rem;
-                            background: #fff;
-                            transform: translateY(-6px);
-                            box-shadow: 0 6px 0 #fff;
-                            transition: .3s;
-                        }
-
-                        .togglebtn.active:before
-                        {
-                            transform: translateY(0) rotate(40deg);
-                            box-shadow: 0 0 0 #fff;
-                        }
-
-                        .togglebtn:after
-                        {
-                            content: '';
-                            position: absolute;
-                            width: 2rem;
-                            height: .2rem;
-                            background: #fff;
-                            transform: translateY(6px); 
-                            transition: .3s;
-                        }
-
-                        .togglebtn.active:after
-                        {
-                            transform: translateY(0) rotate(-40deg); 
-                        }
-
-                        .graph
-                        {
-                            overflow: scroll;
-                        }
-
-}
+    
+    }
+    
 
 @media screen and (max-width: 920px)
 {

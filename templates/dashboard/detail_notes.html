@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block dashboard_sections %}
+          
+
+<div class="my_container_for_assignment_list">
+
+    {% include "snippets/navigation.html" %}
+        
+    {% include "snippets/sidebar.html" %}
+
+
+<div class="ass_list">
+  <div class="container basic">
+    <h1>{{ object.title }}</h1>
+    <p class="basic">{{ object.timestamp }}</p>
+    <p>
+       
+        <a href="{% url 'dashboard:notes-update' pk=object.pk %}"><i class="fa fa-pencil enlarge-symbol"></i></a>
+        <a href="{% url 'dashboard:notes-delete' pk=object.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a>
+  </p>
+  <p>
+      {{ object.body|safe }}
+  </p>
+  </div>
+</div>
+
+
+<div class="home-logo">
+  <img class="home-logo-image" src="{% static 'images/logo/logo.png' %}" alt="">
+</div>
+
+<div class="right-panel">
+    <ul>
+        <li>
+            <a href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
+        </li>
+        
+        <li>
+            <a href="{% url 'dashboard:notes-create' %}">Add Notes</a>
+        </li>
+         
+        <li>
+            <a href="{% url 'dashboard:reminders-create' %}">Add Reminders</a>
+        </li>
+    </ul>
+</div>
+
+
+</div>
+
+
+
+{% endblock dashboard_sections %}

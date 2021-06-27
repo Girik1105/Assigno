@@ -17,4 +17,12 @@ urlpatterns = [
 
     path('dashboard/notes/create/', views.create_notes.as_view() , name='notes-create'),
     path('dashboard/notes/list/', views.list_notes.as_view() , name='notes-list'),
+    path('dashboard/notes/detail/<pk>/', views.detail_notes.as_view() , name='notes-detail'),
+    path('dashboard/notes/delete/<pk>/', views.delete_notes.as_view() , name='notes-delete'),
+    path('dashboard/notes/update/<pk>/', views.update_notes.as_view() , name='notes-update'),
+
+    path('dashboard/reminders/add/', views.create_deadlines.as_view() , name='reminders-create'),
+    path('dashboard/reminders/list/', views.list_deadlines.as_view() , name='reminders-list'),
+    # path('dashboard/reminders/update/<pk>/', views.update_deadlines.as_view() , name='reminders-update'),    
+    # path('dashboard/reminders/delete/<pk>/', views.delete_deadlines.as_view() , name='reminders-delete'),
 ]

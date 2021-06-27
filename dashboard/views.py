@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.db.models import query
 from django.shortcuts import render
 
@@ -28,7 +29,7 @@ def home(request):
     deadlines = models.deadlines.objects.filter(user=request.user)
 
     context = {
-        "recent_assignments": assignments.order_by('-timestamp')[:5],
+        "recent_assignments": assignments.order_by('-timestamp')[:3],
         "assignment_count":assignments.count(),
         "notes_count":notes,
         "deadline_count":deadlines.count(),
@@ -59,7 +60,7 @@ class create_assignments(LoginRequiredMixin, CreateView):
 
 class update_assignments(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = models.assignments
-    template_name = 'dashboard/create_category.html'
+    template_name = 'dashboard/create_assignment.html'
     form_class = forms.create_assignments_form
 
     def form_valid(self, form):
@@ -140,6 +141,14 @@ class create_notes(LoginRequiredMixin, CreateView):
         form.save()
         return redirect(reverse("dashboard:home"))
 
+class detail_notes(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = models.notes
+    template_name = 'dashboard/detail_notes.html'
+
+    def test_func(self):
+        notes = self.get_object()
+        return notes.user == self.request.user
+
 class list_notes(LoginRequiredMixin, ListView):
 
     model = models.notes
@@ -153,4 +162,59 @@ class list_notes(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
         context['notes'] = self.get_queryset(**kwargs)
+        return context
+
+class update_notes(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
+    model = models.notes
+    template_name = 'dashboard/create_notes.html'
+    form_class = forms.create_note_form
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.save()
+        return redirect(reverse('dashboard:notes-list'))
+
+    def test_func(self):
+        notes = self.get_object()
+        return notes.user == self.request.user
+
+class delete_notes(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'dashboard/notes_delete.html'
+    model = models.notes
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:notes-list')
+
+    def test_func(self):
+        notes = self.get_object()
+        return notes.user == self.request.user
+
+
+
+
+class create_deadlines(LoginRequiredMixin, CreateView):
+    model = models.deadlines
+    template_name = 'dashboard/create_deadlines.html'
+    form_class = forms.create_deadline_form
+
+    def post(self, request):
+        form = forms.create_deadline_form(request.POST)
+        form.instance.user = self.request.user
+        form.save()
+        return redirect(reverse("dashboard:reminders-list"))
+
+
+class list_deadlines(LoginRequiredMixin, ListView):
+    model = models.deadlines
+    template_name = 'dashboard/list_deadlines.html'
+
+
+    def get_queryset(self, *args, **kwargs):
+        queryset =  super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['deadlines'] = self.get_queryset(**kwargs)
         return context

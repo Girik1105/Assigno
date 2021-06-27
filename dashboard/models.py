@@ -39,7 +39,7 @@ class categories(models.Model):
 class assignments(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     assignment = models.FileField(upload_to='uploads/student_assignments', blank=True, null=True) # REMEMBER TO REMOVE BLANK AND NULL
-    title = models.CharField(max_length=100, blank=True, null=True)
+    title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -50,6 +50,7 @@ class assignments(models.Model):
 
 class notes(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
+    title = models.CharField(max_length=100)
     body = RichTextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 

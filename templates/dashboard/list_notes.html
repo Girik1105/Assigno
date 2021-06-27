@@ -15,14 +15,14 @@
 <div class="ass_list">
   <div class="container">
       {% for item in notes  %}
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">{{ item.body|safe }}</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
+      <div class="container basic">
+          <h1>{{ item.title }}</h1>
+          <p class="basic">{{ item.timestamp }}</p>
+          <p>
+             <a href="{% url 'dashboard:notes-detail' pk=item.pk %}">View</i></a>
+              <a href="{% url 'dashboard:notes-update' pk=item.pk %}"><i class="fa fa-pencil enlarge-symbol"></i></a>
+              <a href="{% url 'dashboard:notes-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a>
+        </p>
       </div>
       {% endfor %}
   </div>
@@ -34,9 +34,19 @@
 </div>
 
 <div class="right-panel">
-    <a class="btn btn-primary primary-btns" href="{% url 'dashboard:assignment-create' %}">Add Assignments</a> <br>
-    <a class="btn btn-primary primary-btns" href="{% url 'dashboard:notes-create' %}">Add Notes</a> <br>
-    <a class="btn btn-primary primary-btns" href="#">Add Reminders</a><br>
+    <ul>
+        <li>
+            <a href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
+        </li>
+        
+        <li>
+            <a href="{% url 'dashboard:notes-create' %}">Add Notes</a>
+        </li>
+         
+        <li>
+            <a href="{% url 'dashboard:reminders-create' %}">Add Reminders</a>
+        </li>
+    </ul>
 </div>
 
 
