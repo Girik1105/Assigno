@@ -14,6 +14,8 @@
 
 <div class="ass_list">
   <div class="container">
+    {% for category in categories  %}
+    <h1 class="title">{{ category.title }}</h1>
     <table class="table table-borderless enlarge-text">
       <thead>
         <tr>
@@ -27,12 +29,41 @@
         </tr>
       </thead>
       <tbody>
-        {% for item in assignments %}
+        {% for item in category.assignment_in_category.all %}
         <tr>
           <th class="basic">{{ item.title }}</th>
           <td class="basic">{{ item.description }}</td>
           <td class="basic">{{ item.timestamp|date:"d D M Y" }}</td>
-          <td><a href="{{ item.assignment }}" download><i class="fa fa-arrow-circle-o-down enlarge-symbol enlarge-symbol"></i></a></td>
+          <td><a href="{{ item.assignment.url }}" download><i class="fa fa-arrow-circle-o-down enlarge-symbol enlarge-symbol"></i></a></td>
+          <td><a href="{% url 'dashboard:assignment-update' pk=item.pk %}"><i class="fa fa-pencil enlarge-symbol"></i></a></td>
+          <td><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endfor %}
+  </div>
+  <h1 class="title">NO CATEGORY</h1>
+  <div>
+    <table class="table table-borderless enlarge-text">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Added</th>
+          <th scope="col">Download</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Remove</th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in assignments_w_o_category %}
+        <tr>
+          <th class="basic">{{ item.title }}</th>
+          <td class="basic">{{ item.description }}</td>
+          <td class="basic">{{ item.timestamp|date:"d D M Y" }}</td>
+          <td><a href="{{ item.assignment.url }}" download><i class="fa fa-arrow-circle-o-down enlarge-symbol enlarge-symbol"></i></a></td>
           <td><a href="{% url 'dashboard:assignment-update' pk=item.pk %}"><i class="fa fa-pencil enlarge-symbol"></i></a></td>
           <td><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
         </tr>

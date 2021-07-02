@@ -45,17 +45,17 @@ class create_assignments(LoginRequiredMixin, CreateView):
     form_class = forms.create_assignments_form
     template_name = 'dashboard/create_assignment.html'
 
-    def post(self, request, *args, **kwargs):
-        form = forms.create_assignments_form(request.POST, request.FILES)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.user = self.request.user
-            form.save() 
-    
-            return redirect(reverse("dashboard:home"))
-        
-        else:
-            form = forms.Create_assignments_form
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return redirect(reverse('dashboard:assignment-list'))
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(create_assignments, self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "usr":self.request.user,
+        })
+        return kwargs
 
 
 class update_assignments(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
@@ -72,6 +72,12 @@ class update_assignments(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         assignment = self.get_object()
         return assignment.user == self.request.user
 
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(update_assignments, self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "usr":self.request.user,
+        })
+        return kwargs
 
 class list_assignments(LoginRequiredMixin, ListView):
     model = models.assignments
@@ -80,13 +86,15 @@ class list_assignments(LoginRequiredMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         queryset =  super().get_queryset(*args, **kwargs)
         queryset = queryset.filter(user=self.request.user)
+        # for item in queryset:
+        #     print(item.categories)
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
-        context['assignments'] = self.get_queryset(**kwargs)
+        context['categories'] = models.categories.objects.filter(user=self.request.user)
+        context['assignments_w_o_category'] = self.get_queryset(**kwargs).filter(categories=None)
         return context
-
 
 
 class delete_assignment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -100,33 +108,33 @@ class delete_assignment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         assignment = self.get_object()
         return assignment.user == self.request.user
 
-# class create_categories(LoginRequiredMixin, CreateView):
-#     model = models.categories 
-#     form_class = forms.create_category_form
-#     template_name = 'dashboard/create_category.html'
+class create_categories(LoginRequiredMixin, CreateView):
+    model = models.categories 
+    form_class = forms.create_category_form
+    template_name = 'dashboard/create_category.html'
 
-#     def post(self, request, *args, **kwargs):
-#         form = forms.create_category_form(request.POST, request.FILES)
-#         if form.is_valid():
-#             form = form.save(commit=False)
-#             form.user = self.request.user
-#             form.save() 
+    def post(self, request, *args, **kwargs):
+        form = forms.create_category_form(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = self.request.user
+            form.save() 
     
-#             return redirect(reverse("dashboard:home"))
+            return redirect(reverse("dashboard:home"))
         
-#         else:
-#             form = forms.Create_category_form
+        else:
+            form = forms.Create_category_form
 
-# class delete_categories(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-#     template_name = 'dashboard/category_delete.html'
-#     model = models.categories
+class delete_categories(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'dashboard/category_delete.html'
+    model = models.categories
 
-#     def get_success_url(self):
-#         return reverse_lazy('dashboard:assignment-list')
+    def get_success_url(self):
+        return reverse_lazy('dashboard:assignment-list')
 
-#     def test_func(self):
-#         category = self.get_object()
-#         return category.user == self.request.user
+    def test_func(self):
+        category = self.get_object()
+        return category.user == self.request.user
 
 
 class create_notes(LoginRequiredMixin, CreateView):
@@ -135,11 +143,18 @@ class create_notes(LoginRequiredMixin, CreateView):
     template_name = 'dashboard/create_notes.html'
     form_class = forms.create_note_form
 
-    def post(self, request):
-        form = forms.create_note_form(request.POST)
+    def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
-        return redirect(reverse("dashboard:home"))
+        return redirect(reverse('dashboard:notes-list'))
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(create_notes, self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "usr":self.request.user,
+        })
+        return kwargs
+
 
 class detail_notes(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = models.notes
@@ -161,7 +176,8 @@ class list_notes(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
-        context['notes'] = self.get_queryset(**kwargs)
+        context['categories'] = models.categories.objects.filter(user=self.request.user)
+        context['notes_w_o_category'] = self.get_queryset(**kwargs).filter(categories=None)
         return context
 
 class update_notes(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
@@ -178,6 +194,13 @@ class update_notes(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         notes = self.get_object()
         return notes.user == self.request.user
 
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(update_notes, self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "usr":self.request.user,
+        })
+        return kwargs
+
 class delete_notes(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'dashboard/notes_delete.html'
     model = models.notes
@@ -190,8 +213,6 @@ class delete_notes(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return notes.user == self.request.user
 
 
-
-
 class create_deadlines(LoginRequiredMixin, CreateView):
     model = models.deadlines
     template_name = 'dashboard/create_deadlines.html'
@@ -199,6 +220,7 @@ class create_deadlines(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        # print(form.instance.last_date)
         form.save()
         return redirect(reverse('dashboard:reminders-list'))
 
@@ -217,7 +239,7 @@ class list_deadlines(LoginRequiredMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset =  super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(user=self.request.user)
+        queryset = queryset.filter(user=self.request.user).order_by('last_date')
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -232,12 +254,20 @@ class update_deadlines(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        # print(form.instance.last_date)
         form.save()
         return redirect(reverse('dashboard:reminders-list'))
 
     def test_func(self):
         deadlines= self.get_object()
         return deadlines.user == self.request.user
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(update_deadlines, self).get_form_kwargs(**kwargs)
+        kwargs.update({
+            "usr":self.request.user,
+        })
+        return kwargs
 
 class delete_deadlines(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'dashboard/delete_deadlines.html'

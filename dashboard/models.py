@@ -31,6 +31,7 @@ class user_profile(models.Model):
         return self.user.username
 
 class categories(models.Model):
+    user=models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length = 100)
 
     def __str__(self):
@@ -38,7 +39,7 @@ class categories(models.Model):
 
 class assignments(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    assignment = models.FileField(upload_to='uploads/student_assignments', blank=True, null=True) # REMEMBER TO REMOVE BLANK AND NULL
+    assignment = models.FileField(upload_to='uploads/student_assignments', default="uploads/profile_background/default.jpg") # REMEMBER TO REMOVE BLANK AND NULL
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)

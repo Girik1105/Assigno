@@ -14,7 +14,23 @@
 
 <div class="ass_list">
   <div class="container">
-      {% for item in notes  %}
+      {% for category in categories  %}
+        <h1 class="title">{{ category.title }}</h1>
+        {% for item in category.notes_in_category.all  %}
+        <div class="container basic">
+            <h1>{{ item.title }}</h1>
+            <p class="basic">{{ item.timestamp }}</p>
+            <p>
+               <a href="{% url 'dashboard:notes-detail' pk=item.pk %}"><i class="fa fa-eye enlarge-symbol"></i></a>
+                <a href="{% url 'dashboard:notes-update' pk=item.pk %}"><i class="fa fa-pencil enlarge-symbol"></i></a>
+                <a href="{% url 'dashboard:notes-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a>
+          </p>
+        </div>
+        {% endfor %}
+      {% endfor %}
+
+      <h1 class="title">Other Notes</h1>
+      {% for item in notes_w_o_category  %}
       <div class="container basic">
           <h1>{{ item.title }}</h1>
           <p class="basic">{{ item.timestamp }}</p>

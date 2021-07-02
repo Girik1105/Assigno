@@ -141,7 +141,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y/%m/%d', '%d-%m-%Y','%Y-%m-%d')
+
+TIME_ZONE = 'Asia/kolkata'
 
 USE_I18N = True
 
