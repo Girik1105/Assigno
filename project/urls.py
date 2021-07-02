@@ -19,16 +19,19 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from .views import account_signup_view
+
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index.as_view(), name='index'),
     
+    path("accounts/signup/", view=account_signup_view, name='register'),
     path('accounts/', include('allauth.urls')),
 
     path('', include('dashboard.urls')),
-    
+    path('', include('forums.urls')),
 ]
 
 if settings.DEBUG:

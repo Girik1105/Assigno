@@ -23,6 +23,22 @@ from . import forms
 # Create your views here.
 
 @login_required
+def profile_edit_view(request):
+    profile = request.user.profile
+    form = forms.profile_form(instance=profile)
+
+    if request.method == 'POST':
+        form = forms.profile_form(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+
+            return redirect('dashboard:home')
+
+    context = {'form': form}
+    return render(request, 'social/profile_edit.html', context)
+
+
+@login_required
 def home(request):
 
     assignments = models.assignments.objects.filter(user=request.user)

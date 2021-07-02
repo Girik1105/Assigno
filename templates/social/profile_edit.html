@@ -1,0 +1,16 @@
+{% extends "landing/landing_base.html" %}
+{% load bootstrap4 %}
+
+{% block maincontent  %}
+<div class="row justify-content-center mt-3">
+    <div class="col-md-8 col-sm-12 bg-light p-4">
+      <h1>Edit your Profile</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="Submit" class="btn btn-primary" value="Save Changes">
+        <!-- in generic view it defaults to object -->
+      </form>
+    </div>
+</div>
+{% endblock %}

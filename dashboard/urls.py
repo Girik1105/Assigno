@@ -5,6 +5,7 @@ from . import views
 app_name = 'dashboard'
 
 urlpatterns = [
+    path('user/profile/', views.profile_edit_view, name='edit-user-profile'),
     path('dashboard/', views.home, name='home'),
     
     path('dashboard/assignment/create/', views.create_assignments.as_view() , name='assignment-create'),

@@ -5,6 +5,11 @@ from . import models
 
 from django.conf import settings
 
+class profile_form(forms.ModelForm):
+    class Meta:
+        model = models.user_profile
+        fields = ('name','profile_picture', 'background', 'gender', 'birth_date', 'location')
+
 class create_assignments_form(forms.ModelForm):
 
     description = forms.Textarea(attrs={
