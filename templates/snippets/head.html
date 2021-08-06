@@ -14,8 +14,8 @@
 
 <style>
     body{
-        background:url('{% static 'images/background4.jpg' %}');
+        background:url('{{ user.profile.background.url }}');
         background-repeat: no-repeat;
-    background-size: cover;
+        background-size: cover;
     }
 </style>

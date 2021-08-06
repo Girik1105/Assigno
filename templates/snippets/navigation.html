@@ -16,9 +16,10 @@
     <div class="nav_item">
 
     <div class="account_div">
+        a
         <img src="{{ user.profile.profile_picture.url }}"  class="round_image" width="54" alt="">
         <span class="account_username">@{{ user.username }}</span>
-        <span class="account_name">{{ user.profile.name }}</span>
+        <a href="{% url 'dashboard:edit-user-profile' %}"><span class="account_name">{{ user.profile.name }}</span></a>
     </div>
     
 </div>
