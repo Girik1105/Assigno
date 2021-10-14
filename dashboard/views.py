@@ -1,10 +1,12 @@
-from django.contrib.auth import login
-from django.db.models import query
+import os as os 
+
 from django.shortcuts import render
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect, HttpResponse, request
+from django.http import HttpResponse, Http404
+
+from django.conf import settings
 
 from django.views.generic import (CreateView, 
                                   DetailView, 
