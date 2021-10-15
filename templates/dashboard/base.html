@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    {% block bootstrap_block %}{% endblock bootstrap_block %}
+
+    {% include "dashboard/snippets/head.html" %}
+
+    <title>{% block title %}Assigno{% endblock title %}</title>
+</head>
+<body>
+    <div class="dashboard">
+        
+        <!-- sidebar start -->
+        <div class="sidebar">
+            <div class="image"><div class="image-holder"><img src="{% static 'images/dashboard/logo.png' %}" alt="Image not loaded"></div></div>
+            <!-- Navbar Start-->
+            <div class="navbar">
+                <ul class="navigation">
+                    <li {% block active_home %}{% endblock active_home %}><a href="{% url 'dashboard:home' %}"> <i class="bi bi-house"></i> <span class="text">Home</span> </a></li>
+                    <li {% block active_ass %}{% endblock active_ass %}><a href="{% url 'dashboard:assignment-list' %}"> <i class="bi bi-file-earmark"></i> <span class="text">Assignments</span></a></li>
+                    <li {% block active_note %}{% endblock active_note %}><a href="{% url 'dashboard:notes-list' %}"> <i class="bi bi-paperclip"></i> <span class="text">Notes</span></a></li>
+                    <li {% block active_rem %}{% endblock active_rem %}><a href="{% url 'dashboard:reminders-list' %}"> <i class="bi bi-bell"></i> <span class="text">Reminders</span> </a></li>
+                    <li {% block active_to %}{% endblock active_to %}><a href="{% url 'dashboard:task-list' %}"> <i class="bi bi-pencil-square"></i> <span class="text">To-do</span> </a></li>
+                    <li><a href="{% url 'dashboard:edit-user-profile' %}"> <i class="bi bi-gear"></i> <span class="text">Profile Settings</span> </a></li>
+                </ul>
+            </div>
+            <!--Navbar End-->
+        </div>
+        <!-- sidebar end -->
+
+        <!-- Main Area Start-->
+        <div class="main-area">
+
+            <!--Header div-->
+            <div class="main-area-header">
+                <div class="top-bar">
+                    <div class="greetings"><h1>{% block mainheading %}Dashboard{% endblock mainheading %}</h1></div>
+                    <div class="datetime">{{ today|date:"D, d M Y" }}</div>
+
+                    <div class="greeter-banner">
+                        <div class="welcome-text">
+                            <h1>Welcome back! @{{ user.username }}</h1>
+                            <p class="quote">{{ quote }}</p>
+                        </div>
+                        <div class="image-for-banner"><img src="{% static 'images/dashboard/dashboard.svg' %}" alt="image not loaded"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!--header Div End-->
+
+            {% block index %}{% endblock index %}
+
+            <!--Main Content Start-->
+            <div class="main-area-content">{% block maincontent %}{% endblock maincontent %}</div>
+
+        </div>
+        <!--Main area End-->
+
+        <!-- Secondary Start-->
+        <div class="right-bar">
+            <div class="logout-bar"><a href="{% url 'account_logout' %}"><p>Logout  <i class="bi bi-box-arrow-right"></i></p> </a></div>
+            {% block rightbar %}{% include "dashboard/snippets/account_rightbar.html" %}{% endblock rightbar %}
+        </div>
+        <!--Secondary End-->
+    </div>
+</body>
+</html>

@@ -1,46 +1,20 @@
-{% extends "base.html" %}
+{% extends "dashboard/base.html" %}
 {% load bootstrap4 %}
+{% load static %}
 
-{% block dashboard_sections %}
-          
+{% block bootstrap_block %}<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock bootstrap_block %}
+{% block title %}Create Todo{% endblock title %}
+{% block active_ass %}class="active"{% endblock active_ass %}
+{% block mainheading %}Create Todo{% endblock mainheading %}
 
-<div class="my_container_for_assignment">
-
-    {% include "snippets/navigation.html" %}
-        
-    {% include "snippets/sidebar.html" %}
-
-<div class="form-panel">
-    <div class="container">
-        <h1 class="title">Add Tasks</h1>
-
-        <form method="POST" class="enlarge-symbol" enctype="multipart/form-data">
-        
-            {% csrf_token %}
-            {% bootstrap_form form %}
-        
-            <input type="submit" class="round-btn">
-            
-        </form>
-    </div>
+{% block maincontent %}
+<div class="spacer"><h1 class="form-heading">New Todo</h1></div>
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Add To Todo list" class="blue-btn color-red-btn btn-enlarger">
+    </form>
+    <a href="{% url 'dashboard:task-list' %}"><button class="blue-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
 </div>
-
-<div class="right-panel">
-    <ul>
-        <li>
-            <a href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
-        </li>
-        
-        <li>
-            <a href="{% url 'dashboard:notes-create' %}">Add Notes</a>
-        </li>
-         
-        <li>
-            <a href="#">Add Reminders</a>
-        </li>
-    </ul>
-</div>
-
-</div>
-
-{% endblock dashboard_sections %}
+{% endblock maincontent %}

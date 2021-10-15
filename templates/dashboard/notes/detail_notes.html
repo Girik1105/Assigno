@@ -1,0 +1,26 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}Notes{% endblock title %}
+{% block active_note %}class="active"{% endblock active_note %}
+{% block mainheading %}Notes{% endblock mainheading %}
+
+{% block maincontent %}
+<div class="note-container">
+    <h1 class="heading-category">{{ object.title }}</h1>
+    <p class="sub-title-note"><b>Added on:</b>  {{ object.timestamp }}</p>
+    {{ object.body|safe }}
+</div>
+{% endblock maincontent %}
+
+
+{% block rightbar %}
+<div class="categories">
+    <div class="headings">Note Actions</div>
+    <div class="note-action-btns">
+        <a href="{% url 'dashboard:notes-list' %}"><button class="blue-btn btn-enlarger"><i class="bi bi-arrow-bar-left"></i></button></a>
+        <a href="{% url 'dashboard:notes-update' pk=object.pk %}"><button class="blue-btn color-purple-btn btn-enlarger"><i class="bi bi-pencil-square"></i></button></a>
+        <a href="{% url 'dashboard:notes-delete' pk=object.pk %}"><button class="blue-btn color-red-btn btn-enlarger"><i class="bi bi-trash"></i></button></a>
+    </div>
+</div>
+{% endblock rightbar %}

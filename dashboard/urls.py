@@ -14,7 +14,8 @@ urlpatterns = [
     path('dashboard/assignment/delete/<pk>/', views.delete_assignment.as_view() , name='assignment-delete'),
 
     path('dashboard/category/create/', views.create_categories.as_view() , name='category-create'),
-    path('dashboard/category/delete/<pk>/', views.delete_categories.as_view() , name='category-delete'),
+    path('dashboard/category/edit/', views.list_categories.as_view() , name='category-edit'),
+    path('dashboard/category/delete/<pk>/', views.delete_categories, name='category-delete'),
 
     path('dashboard/notes/create/', views.create_notes.as_view() , name='notes-create'),
     path('dashboard/notes/list/', views.list_notes.as_view() , name='notes-list'),

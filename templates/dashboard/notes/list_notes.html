@@ -1,0 +1,63 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}Notes{% endblock title %}
+{% block active_note %}class="active"{% endblock active_note %}
+{% block mainheading %}Notes{% endblock mainheading %}
+
+{% block maincontent %}
+
+    <div class="spacer"><a href="{% url 'dashboard:notes-create' %}"><button class="blue-btn color-red-btn btn-enlarger">Add Notes</button></a></div>
+
+    {% for category in categories  %}
+        <div class="spacer"><h1 class="heading-category">{{ category.title }}</h1></div>
+
+        {% for item in category.notes_in_category.all  %}
+        <div class="notes-container">
+            <div class="note-item">
+                <div class="note-item-title">{{ item.title }}
+                    <div class="note-description">{{ item.timestamp }}</div>
+                </div>
+                <div class="note-btn-holder"><a href="{% url 'dashboard:notes-detail' pk=item.pk %}"><button class="blue-btn color-purple-btn"><i class="bi bi-eye-fill"></i></button></a></div>
+            </div>
+        </div> 
+        
+        {% empty %}
+        <p class="sub-title">No notes here</p>
+        {% endfor %}
+
+    {% endfor %}
+
+    <div class="spacer"><h1 class="heading-category">No Category</h1></div>
+
+    {% for item in notes_w_o_category  %}
+        <div class="notes-container">
+            <div class="note-item">
+                <div class="note-item-title">{{ item.title }}
+                    <div class="note-description">{{ item.timestamp }}</div>
+                </div>
+
+                <div class="note-btn-holder"><a href="{% url 'dashboard:notes-detail' pk=item.pk %}"><button class="blue-btn color-purple-btn"><i class="bi bi-eye-fill"></i></button></a></div>
+            </div>
+        </div>
+    {% empty %}
+    <p class="sub-title">No notes here</p>
+    {% endfor %}
+
+{% endblock maincontent %}
+
+{% block rightbar %}
+<div class="categories">
+    <div class="headings">Categories</div>
+    <div class="category-list">
+        {% for cat in categories %}
+        <div class="category-list-item"><div class="category-title">{{ cat.title }}</div><div class="category-amount">{{ cat.notes_in_category.all.count }}</div></div>
+        {% endfor %}
+        <div class="category-list-item"><div class="category-title">No Category</div><div class="category-amount">{{ notes_w_o_category.all.count }}</div></div>
+    </div>
+    <div class="action-btns">
+        <a href="{% url 'dashboard:category-create' %}"><button class="blue-btn color-purple-btn btn-enlarger">Add Category</button></a>
+        <a href="{% url 'dashboard:category-edit' %}"><button class="blue-btn color-red-btn btn-enlarger">Edit Categories</button></a>
+    </div>
+</div>
+{% endblock rightbar %}

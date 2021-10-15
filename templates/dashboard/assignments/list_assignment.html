@@ -1,0 +1,64 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}Assignments{% endblock title %}
+{% block active_ass %}class="active"{% endblock active_ass %}
+{% block mainheading %}Assignments{% endblock mainheading %}
+
+{% block maincontent %}
+
+    <div class="spacer">
+        <a href="{% url 'dashboard:assignment-create' %}"><button class="blue-btn color-red-btn btn-enlarger">Create Assignment</button></a>
+    </div>
+
+    {% for category in categories  %}
+        <div class="spacer"><h1 class="heading-category">{{ category.title }}</h1></div>
+
+        <div class="assignments-container">
+            {% for item in category.assignment_in_category.all %}
+            <div class="assignments">
+                <div class="assignment-title">{{ item.title }}</div>
+                <div class="assignment-desc">{{ item.description }}</div>
+                <div class="assignment-due-date">{{ item.timestamp|date:"d D M Y" }}</div>
+                <div class="assignment-btn-holder"><a href="{% url 'dashboard:assignment-update' pk=item.pk %}"><button class="blue-btn color-purple-btn"><i class="bi bi-pencil-fill"></i></button></a><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><button class="blue-btn color-red-btn"><i class="bi bi-trash-fill"></i></button></a></div>
+            </div>
+            {% empty %}
+            <p class="sub-title">No Assignments Here</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <div class="spacer">
+        <h1 class="heading-category">No Category</h1>
+    </div>
+
+    <div class="assignments-container">
+        {% for item in assignments_w_o_category %}
+            <div class="assignments">
+                <div class="assignment-title">{{ item.title }}</div>
+                <div class="assignment-desc">{{ item.description }}</div>
+                <div class="assignment-due-date">{{ item.timestamp|date:"d D M Y" }}</div>
+                <div class="assignment-btn-holder"><a href="{% url 'dashboard:assignment-update' pk=item.pk %}"><button class="blue-btn color-purple-btn"><i class="bi bi-pencil-fill"></i></button></a><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><button class="blue-btn color-red-btn"><i class="bi bi-trash-fill"></i></button></a></div>
+            </div>
+        {% empty %}
+        <p class="sub-title">No Assignments Here</p>
+        {% endfor %}
+    </div>
+
+{% endblock maincontent %}
+
+{% block rightbar %}
+<div class="categories">
+    <div class="headings">Categories</div>
+    <div class="category-list">
+        {% for cat in categories %}
+        <div class="category-list-item"><div class="category-title">{{ cat.title }}</div><div class="category-amount">{{ cat.assignment_in_category.all.count }}</div></div>
+        {% endfor %}
+        <div class="category-list-item"><div class="category-title">No Category</div><div class="category-amount">{{ assignments_w_o_category.all.count }}</div></div>
+    </div>
+    <div class="action-btns">
+        <a href="{% url 'dashboard:category-create' %}"><button class="blue-btn color-purple-btn btn-enlarger">Add Category</button></a>
+        <a href="{% url 'dashboard:category-edit' %}"><button class="blue-btn color-red-btn btn-enlarger">Edit Categories</button></a>
+    </div>
+</div>
+{% endblock rightbar %}

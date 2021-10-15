@@ -1,0 +1,635 @@
+::selection{
+    background-color: #00ffaa;
+}
+
+body::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #1DA1F2;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+i {
+    font-size: 1.2em;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+
+.dashboard {
+    display:grid;
+    /* height: 98vh; */
+    width: 100%;
+    grid-template-columns: 0.4fr 1.5fr 0.6fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "sidebar   main-area  rightbar"
+        "sidebar   main-area  rightbar"
+        "sidebar   main-area  rightbar"
+    ;
+    grid-column-gap: 0.3rem;
+    grid-row-gap: 0.3rem;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+    justify-content: flex-start;
+}
+
+.sidebar .image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sidebar .image .image-holder {
+    padding: 0.8em 0.8em 0.8em 0;
+}
+
+.sidebar .image .image-holder img{
+    height: auto;
+    width: 80%;
+    margin: auto;
+}
+
+.sidebar .navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.sidebar .navbar .navigation {
+    list-style: none;
+    top: 0;
+    padding: 0 0.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar .navigation li{
+    padding: 0.2rem 0.3em; 
+    margin: 1rem 0px;  
+    width: 100%;
+    /* border-radius: 0.7em; */
+    font-family: 'Lato', sans-serif;
+    line-height: 2.5em;
+    transition: 1s smooth;
+    font-size: 1rem;
+}
+
+.sidebar .navigation i{
+    padding-right: 0.6em;
+    /* color: black; */
+}
+
+.sidebar .navigation a:hover{
+    color: #474d9b;
+}
+
+.sidebar .navigation li:hover{
+    border-right: 2px solid #474d9b;
+}
+
+.sidebar .navigation .active a{
+    color: #ff7f8d;;
+}
+
+.sidebar .navigation .active {
+    border-right: 2px solid #ff7f8d;
+}
+
+.main-area {
+    grid-area: main-area;
+    background-color: rgb(246, 247, 250);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    border-radius: 1.5rem;
+}
+
+.main-area .main-area-header {
+    width: 100%;
+}
+
+.main-area .main-area-header .top-bar {
+    width: 100%;
+    padding: 0.4rem 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.main-area .main-area-header .top-bar .greetings {
+    font-size: 1.0rem;
+    font-family: 'Lobster', cursive;
+}
+
+.main-area .main-area-header .top-bar .datetime {
+    font-size: 1.0rem;
+    font-family: 'Noto Sans Display', sans-serif;
+    padding: 2rem 1rem;
+    margin-left: auto;
+    font-weight: 700;
+}
+
+.main-area .main-area-header .top-bar .greeter-banner {
+    width: 90%;
+    margin: auto;
+    background-color: #f9e4e9;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 1rem;
+}
+
+.main-area .main-area-header .top-bar .greeter-banner .welcome-text{
+    color: #e56978;
+    font-size: 0.7rem;
+    font-family: 'Varela Round', sans-serif;
+    padding: 1rem;
+    width: 58%;
+}
+
+.main-area .main-area-header .top-bar .greeter-banner .welcome-text .quote {
+    color: black;
+    padding: 0.2rem;
+    font-size: 1rem;
+}
+
+.main-area .main-area-header .top-bar .greeter-banner .image-for-banner {
+    width: 40%;
+    margin-left: auto;
+}
+
+.main-area .main-area-header .top-bar .greeter-banner .image-for-banner img{
+    padding: 1rem;
+    width: 8em;
+    margin-left: 3.2em;
+}
+
+.main-area .main-area-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.main-area .main-area-content-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.main-area .main-area-content .left-panel {
+    background-color:rgb(255, 255, 255);
+    height: 35rem;
+    width: 48%;
+    border-radius: 2rem;
+    padding: 1rem;
+    overflow: scroll;
+}
+
+.main-area .main-area-content .left-panel::-webkit-scrollbar {
+    display: none;
+}
+
+.main-area .main-area-content .left-panel .left-panel-list {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.main-area .main-area-content .left-panel .left-panel-list .list-item {
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0.1rem;
+    margin: 0.5rem 0;
+    font-family: 'Mukta', sans-serif;
+    font-size: 1rem;
+}
+
+.main-area .main-area-content .left-panel .left-panel-list .list-item .list-title{
+    width: 65%;
+}
+
+.main-area .main-area-content .left-panel .left-panel-list .list-item .list-added-on {
+    width: 30%;
+    margin-left: 3%;
+}
+
+.main-area .main-area-content .left-panel .left-panel-list .list-item .enlarge {
+    font-size: 1.35rem;
+}
+
+.main-area .main-area-content .right-panel {
+    background-color:rgb(255, 255, 255);
+    height: 35rem;
+    width: 48%;
+    border-radius: 2rem;
+    font-family: 'Mukta', sans-serif;
+    padding: 1rem;
+}
+
+.main-area .main-area-content .right-panel .right-todo-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.main-area .main-area-content .right-panel .right-todo-list .right-list-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.2rem;
+    margin: 0.5rem 0;
+}
+
+
+.main-area .main-area-content .right-panel .right-todo-list .right-list-item img{
+    height: 2rem;
+    width: 2rem;
+    margin-right: 0.5em;
+}
+
+.main-area .main-area-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.main-area .main-area-footer .main-area-footer-box{
+    width: 30%;
+    font-size: 1.4rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    color: white;
+}
+
+.main-area .main-area-footer .main-area-footer-box:nth-of-type(1) {
+    background-color:#474d9b;
+}
+
+.main-area .main-area-footer .main-area-footer-box:nth-of-type(2) {
+    background-color:#9799d5;
+}
+
+.main-area .main-area-footer .main-area-footer-box:nth-of-type(3) {
+    background-color: #ff7f8d;
+}
+
+
+.main-area .main-area-footer .main-area-footer-box i{
+    margin-right: 0.6rem;
+    font-size: 2.6rem;
+}
+
+.number{
+    font-size: 4rem;
+    float: right;
+    font-family: 'Rubik', sans-serif;
+    padding: 0 0.2em;
+}
+
+.right-bar {
+    grid-area: rightbar;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.right-bar .logout-bar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+}
+
+.right-bar .logout-bar p:hover {
+    color: #1DA1F2;
+}
+
+.right-bar .logout-bar p{
+    float: right;
+    font-family: 'Rubik', sans-serif;
+}
+
+.right-bar .account-credentials .profile-image-holder {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.right-bar .account-credentials .profile-image-holder img{
+    height: auto;
+    width: 10rem;
+    margin-left: 0.7rem;
+    border-radius: 100%;
+}
+
+.right-bar .account-credentials .right-bar-name {
+    font-size: 1.5rem;
+    padding: 0.2rem;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.right-bar .account-credentials .right-bar-location {
+    font-size: 1.5rem;
+    padding: 0.2rem;
+    margin: 0.7rem 0;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.reminders {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.reminders .reminder-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    padding: 2rem;
+}
+
+.reminders .reminder-list .reminder-list-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.2rem;
+    margin: 0.5rem 0;
+}
+
+.reminders .reminder-list .reminder-list-item img{
+    height: 2rem;
+    width: 2rem;
+    margin-right: 0.5em;
+}
+
+.reminders .reminder-list .reminder-list-item .reminder-text {
+    font-size: 0.8em;
+    font-family: 'Lato', sans-serif;
+}
+
+.main-area-content .assignments-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.main-area-content .assignments-container .assignments {
+    height: auto;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 1em;
+    background-color: white;
+}
+
+.main-area-content .assignments-container .assignments .assignment-title {
+    width: 100%;
+    font-family: 'Lato', sans-serif;
+}
+
+.main-area-content .assignments-container .assignments .assignment-desc {
+    width: 100%;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+.main-area-content .assignments-container .assignments .assignment-due-date {
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 1.4rem;
+}
+
+.main-area-content .assignments-container .assignments .assignment-btn-holder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.main-area-content .assignments-container .assignments .assignment-btn-holder button{
+    font-size: 0.8em;
+}
+
+.right-bar .categories{
+    width: 100%;
+    padding: 1rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.right-bar .categories .category-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+}
+
+.right-bar .categories .category-list .category-list-item {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    margin: 0.6rem 0;
+}
+
+.right-bar .categories .category-list .category-list-item .category-amount {
+    margin-left: auto;
+    margin-right: 0.1rem;
+}
+
+.action-btns {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 0;
+}
+
+.action-btns button{
+    width: 90%;
+}
+
+.main-area-content .notes-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.main-area-content .notes-container .note-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    font-family: 'Lato', sans-serif;
+}
+
+.main-area-content .notes-container .note-item .note-item-title {
+    width: 80%;
+    margin: 0.5rem;
+}
+
+.main-area-content .notes-container .note-item .note-description {
+    width: 100%;
+    font-size: 0.6em;
+    margin: 1rem 0;
+}
+
+.main-area-content .notes-container .note-item .note-btn-holder {
+    display: flex;    
+    flex-direction: column;
+    width: 20%;
+    align-items: flex-end;
+    padding: 0.4rem;
+}
+
+.main-area-content .reminder-holders {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-area-content .reminder-holders .reminder-item {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    width: 100%;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-area-content .reminder-holders .reminder-item img{
+    height: 6rem;
+    width: 6rem;
+    margin: 0 0.5rem;
+}
+
+.main-area-content .reminder-holders .reminder-item ul {
+    list-style-type: none;
+    align-self: flex-end;
+    font-family: 'Lato', sans-serif;
+}
+
+.main-area-content .reminder-holders .reminder-item li{
+    padding: 0.4rem;   
+    font-size: 0.8em;
+}
+
+.main-area-content .reminder-holders .reminder-item .heading-reminder {
+    margin: 0.5rem 1.7rem 0 3rem;
+    font-size: 1.6em;
+}
+
+.main-area-content .reminder-holders .reminder-item .text-holder-reminder {
+    width: 40%;
+    padding-left: 1rem;
+}
+
+.note-action-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
+.note-action-btns button{
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 2rem;
+    font-size: 1em;
+}
+
+.reminder-btn-holder {
+    display: flex;    
+    flex-direction: column;
+    width: 20%;
+    align-items: flex-end;
+    padding: 0.4rem;
+    margin-left: 3rem;
+}
+
+.green-fill {
+    background-color: #9799d5;
+}
+
+.white-fill {
+    background-color: white;
+}
+
+.red-fill {
+    background-color: #ff7f8d;
+}
+
+.green-fill-text {
+    color: #9799d5;
+}
+
+.red-fill-text {
+    color: #ff7f8d;
+}

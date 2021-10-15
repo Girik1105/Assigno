@@ -3,18 +3,18 @@
 {% load static %}
 
 {% block bootstrap_block %}<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock bootstrap_block %}
-{% block title %}Delete Todo{% endblock title %}
+{% block title %}Delete Assignment{% endblock title %}
 {% block active_ass %}class="active"{% endblock active_ass %}
-{% block mainheading %}Delete Todo{% endblock mainheading %}
+{% block mainheading %}Delete Assignment{% endblock mainheading %}
 
 {% block maincontent %}
-<div class="spacer"><h1 class="form-heading">Delete Todo</h1></div>
-<p class="sub-title">Are you sure you want to delete this Todo? This action <b>cannot be undone!</b></p>
+<div class="spacer"><h1 class="form-heading">Delete Assignment</h1></div>
+<p class="sub-title">Are you sure you want to delete this assignment? This action <b>cannot be undone!</b></p>
 <div class="form-container">
     <form method="POST">
         {% csrf_token %}
         <input type="submit" value="Delete" class="blue-btn color-red-btn btn-enlarger">
     </form>
-    <a href="{% url 'dashboard:task-list' %}"><button class="blue-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
+    <a href="{% url 'dashboard:assignment-list' %}"><button class="blue-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
 </div>
 {% endblock maincontent %}

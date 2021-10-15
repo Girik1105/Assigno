@@ -1,72 +1,68 @@
-{% extends "base.html" %}
+{% extends "dashboard/base.html" %}
 {% load static %}
-{% block dashboard_sections %}
 
-<div class="my_container">
+{% block title %}Home{% endblock title %}
+{% block active_home %}class="active"{% endblock active_home %}
+{% block mainheading %}home{% endblock mainheading %}
 
-    {% include "snippets/navigation.html" %}
-        
-    {% include "snippets/sidebar.html" %}
-
-    <div class="card1">
-    <span class="stats"> {{ assignment_count }}</span>
-    <br>
-    <span class="stat_title">Assignments</span> 
-    </div>
-    
-    <div class="card2">
-    <span class="stats"> {{ deadline_count }}</span>
-    <br>
-    <span class="stat_title">Reminders</span> 
-    </div>
-    
-    <div class="card3">
-    <span class="stats">{{ notes_count }}</span> 
-    <br>
-    <span class="stat_title">Note Slides</span> 
-    </div>
-
-    
-    
-    <div class="sub-content">
-        <h1 class="title">Recent Assignments</h1>
-        {% for item in recent_assignments  %}
-        <div class="card enlarge-text">
-            <div class="card-body">
-              <h5 class="card-title basic"><strong>{{ item.title }}</strong></h5>
-              <h6 class="card-subtitle mb-2 text-muted basic">{{ item.assignment }}</h6>
-              <p class="card-text">{{ item.description }}</p>
-              <a href="#" class="card-link enlarge-text"><a href="{% url 'dashboard:assignment-delete' pk=item.pk %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></a>
-              
-            </div>
-          </div>
-        {% endfor %}
-    </div>
-    
-    
-    <div class="home-logo">
-        <img class="home-logo-image" src="{% static 'images/logo/logo.png' %}" alt="">
-    </div>
-
-    <div class="right-panel">
-       <p class="basic">
-        Upcoming Reminders:
-       </p>
-            {% for item in deadline  %}
-            <div class="card enlarge-text">
-                <div class="card-body">
-                  <h5 class="card-title">{{ item.title }}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{ item.description }}</h6>
-                  <p class="card-text">{{ item.last_date|date:"D d M Y" }}</p>
-
-                </div>
-              </div>
-              {% empty %}
-             <p class="basic"> (No Reminders)</p>
-            {% endfor %} 
-    </div>        
-    
-    
+{% block index %}
+{% if today|date:"d M" == user.profile.birth_date|date:"d M" %}<div class="spacer"><h1 class="headings">happiest Birthday {{ user.profile.name }}! 🎂🎉</h1></div>{% endif %}
+<div class="main-area-footer heading-font">
+  <div class="main-area-footer-box">
+      <div class="card-title-holder"><i class="bi bi-bell-fill"></i>Notes </div>
+      <div class="number-holder"><span class="number">{{ notes_count }}</span></div>
+  </div>
+  <div class="main-area-footer-box">
+      <div class="card-title-holder"><i class="bi bi-file-earmark-fill"></i>Reminders </div>
+      <div class="number-holder"><span class="number">{{ deadline_count }}</span></div>
+  </div>
+  <div class="main-area-footer-box">
+      <div class="card-title-holder"><i class="bi bi-card-list"></i>Assignments </div>
+      <div class="number-holder"><span class="number">{{ assignment_count }}</span></div>
+  </div>
 </div>
+{% endblock index %}
 
-{% endblock dashboard_sections %}
+{% block maincontent %}
+<div class="main-area-content-items">
+  <div class="left-panel">
+      <span class="headings">Recent Assignments </span>
+      <div class="left-panel-list">
+          <div class="list-item"><div class="list-title enlarge">Name:</div><div class="list-added-on enlarge">Added on: </div></div>
+          {% for item in recent_assignments  %}
+            <div class="list-item"><div class="list-title">{{ item.title }}</div><div class="list-added-on">{{ item.timestamp|date:"d M Y" }}</div></div>
+          {% empty %} <p class="sub-title">(No Recent Assignments)</p> {% endfor %}
+      </div>
+  </div>
+
+  <div class="right-panel">      
+      <span class="headings enlarge">Upcoming Reminders</span>
+        <div class="right-todo-list">
+          {% for item in deadline  %}
+          <a href="{% url 'dashboard:reminders-list' %}"><div class="right-list-item {% if item.last_date|date:'d M Y' == today|date:'d M Y' %}green-fill-text{% elif item.is_past_due %}red-fill-text{% endif %}"><img src="{% static 'images/dashboard/rem.png' %}" alt=""><div class="todo-text">{{ item.title }}</div></div></a>
+          {% empty %} <p class="sub-title">(No Reminders)</p> {% endfor %} 
+        </div>
+    </div>
+</div>
+{% endblock maincontent %}
+
+{% block rightbar %}
+  <div class="account-credentials">
+      <div class="profile-image-holder"><img src="{{ user.profile.profile_picture.url }}" alt=""></div>
+      <div class="right-bar-name">{{ user.profile.name }}</div>
+      <div class="right-bar-location"><i class="bi bi-heart-fill"></i> {{ user.profile.birth_date }}</div>
+      <div class="right-bar-location"><i class="bi bi-geo-alt-fill"></i> {{ user.profile.location }}</div>
+      <div class="right-bar-location"><i class="bi bi-person-fill"></i> {{ user.profile.gender }}</div>
+  </div>
+
+  <div class="reminders">
+    <div class="reminder-list">
+        <div class="reminder-list-item heading"><div class="reminder-text">Recent Todo</div></div>
+        {% for item in todo  %}
+          <div class="reminder-list-item"><img src="{% static 'images/dashboard/todo.png' %}" alt=""><div class="reminder-text">{{ item.title }}</div></div>
+        {% empty %}
+          <p class="basic"> (No Todo)</p>
+        {% endfor %} 
+    </div>
+  </div>
+{% endblock rightbar %}

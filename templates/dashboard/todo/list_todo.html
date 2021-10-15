@@ -1,72 +1,50 @@
-{% extends "base.html" %}
-{% load bootstrap4 %}
+{% extends "dashboard/base.html" %}
 {% load static %}
 
-{% block dashboard_sections %}
-          
+{% block bootstrap_block %}<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">{% endblock bootstrap_block %}
+{% block title %}To-do{% endblock title %}
+{% block active_to %}class="active"{% endblock active_to %}
+{% block mainheading %}To-do{% endblock mainheading %}
 
-<div class="my_container_for_assignment_list">
+{% block maincontent %}
+<div class="spacer"><a href="{% url 'dashboard:task-create' %}"><button class="blue-btn color-red-btn btn-enlarger">Create Todo</button></a></div>
 
-    {% include "snippets/navigation.html" %}
-        
-    {% include "snippets/sidebar.html" %}
+<div class="form-container">
+    <h1 class="heading">To-do</h1>
 
-
-<div class="ass_list">
-  <div class="container">
-      <h1 class="title">All Tasks</h1>
-      <a href="{% url 'dashboard:task-create' %}"><button class="btn btn-primary primary-btns">ADD TASKS</button></a>
-        <table class="leftstand">
-            <tr class="leftstand">
-                <th class="padofpads">Tasks:</th>
-                <th></th>
-                <th></th>
-            </tr>
-            {% for task in tasks %}
-                {% if task.complete %}
-                <tr class="leftstand basic">
-                    <td class="enlarge-symbol"><strike>{{task.title}}</strike></td>
-                    <td><a href="{% url 'dashboard:task-update' task.id %}"><i class="fa fa-pencil enlarge-symbol"></i></a></td>
-                    <td><a href="{% url 'dashboard:task-delete' task.id %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
-                </tr>            
-                {% else %}
-                <tr class="leftstand basic">
-                    <td class="enlarge-symbol">{{task.title}}</td>
-                    <td><a href="{% url 'dashboard:task-update' task.id %}"><i class="fa fa-pencil enlarge-symbol"></i></a></td>
-                    <td><a href="{% url 'dashboard:task-delete' task.id %}"><i class="fa fa-trash-o enlarge-symbol"></i></a></td>
+    <table class="table-balancer table table-borderless text-center">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Added on</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            {% if task.complete %}
+                <tr class="beautify">
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.created|date:"d M Y" }}</td>
+                    <td class="completer"><i class="bi bi-check-square"></i></td>
+                    <td><a href="{% url 'dashboard:task-delete' pk=task.pk %}"><button class="blue-btn color-red-btn btn-enlarger"><i class="bi bi-trash"></i></button></a></td>
                 </tr>
-                {% endif %}
-            {% empty %}
-            <h3 class="leftstand">No items in List</h3>
-            {% endfor %}
-        </table>
-  </div>
+            {% else %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.created|date:"d M Y" }}</td>
+                    <td><a href="{% url 'dashboard:task-update' pk=task.pk %}"><button class="blue-btn color-purple-btn btn-enlarger"><i class="bi bi-pencil-square"></i></button></a></td>
+                    <td><a href="{% url 'dashboard:task-delete' pk=task.pk %}"><button class="blue-btn color-red-btn btn-enlarger"><i class="bi bi-trash"></i></button></a></td>
+                </tr>
+            {% endif %}
+        {% empty %}
+            <tr><td><p class="subtitle">No Todo Added!</p></td><td>Add your first now!</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
 </div>
-
-
-<div class="home-logo">
-  <img class="home-logo-image" src="{% static 'images/logo/logo.png' %}" alt="">
-</div>
-
-<div class="right-panel">
-  <ul>
-      <li>
-          <a href="{% url 'dashboard:assignment-create' %}">Add Assignments</a>
-      </li>
-      
-      <li>
-          <a href="{% url 'dashboard:notes-create' %}">Add Notes</a>
-      </li>
-       
-      <li>
-          <a href="{% url 'dashboard:reminders-create' %}">Add Reminders</a>
-      </li>
-  </ul>
-</div>
-
-
-</div>
-
-
-
-{% endblock dashboard_sections %}
+{% endblock maincontent %}

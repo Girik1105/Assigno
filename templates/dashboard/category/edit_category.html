@@ -1,0 +1,18 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}Categories{% endblock title %}
+{% block mainheading %}Categories{% endblock mainheading %}
+
+{% block maincontent %}
+
+    {% for category in categories  %}
+        <div class="spacer">
+            <h1 class="heading-category">{{ category.title }}</h1>
+            <a href="{% url 'dashboard:category-delete' pk=category.pk %}"><button class="blue-btn color-purple-btn btn-enlarger"><i class="bi bi-trash"></i></button></a>
+        </div>
+
+        {% endfor %}
+        <a href="{% url 'dashboard:home' %}"><button class="blue-btn color-red-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
+
+{% endblock maincontent %}

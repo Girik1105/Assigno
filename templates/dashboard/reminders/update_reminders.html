@@ -3,18 +3,18 @@
 {% load static %}
 
 {% block bootstrap_block %}<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock bootstrap_block %}
-{% block title %}Update Todo{% endblock title %}
+{% block title %}Update Reminder{% endblock title %}
 {% block active_ass %}class="active"{% endblock active_ass %}
-{% block mainheading %}Update Todo{% endblock mainheading %}
+{% block mainheading %}Update Reminder{% endblock mainheading %}
 
 {% block maincontent %}
-<div class="spacer"><h1 class="form-heading">Update Todo</h1></div>
+<div class="spacer"><h1 class="form-heading">Update Reminder</h1></div>
 <div class="form-container">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input type="submit" value="Update Todo list" class="blue-btn color-red-btn btn-enlarger">
+        <input type="submit" value="update Reminder" class="blue-btn color-red-btn btn-enlarger">
     </form>
-    <a href="{% url 'dashboard:task-list' %}"><button class="blue-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
+    <a href="{% url 'dashboard:reminders-list' %}"><button class="blue-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
 </div>
 {% endblock maincontent %}

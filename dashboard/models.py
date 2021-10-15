@@ -8,6 +8,8 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+from datetime import date
+
 # Create your models here.
 class user_profile(models.Model):
     user = models.OneToOneField(User, primary_key=True, related_name='profile', on_delete=models.CASCADE)
@@ -67,8 +69,11 @@ class deadlines(models.Model):
     assignments = models.ForeignKey(assignments, blank=True, null=True, on_delete = models.CASCADE)
     
     last_date = models.DateField()
-
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def is_past_due(self):
+        return date.today() > self.last_date
 
     def __str__(self):
         return self.title

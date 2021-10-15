@@ -22,6 +22,10 @@ from django.core.mail import send_mail
 from . import models
 from . import forms 
 
+from django.utils import timezone
+
+import requests
+import random
 # Create your views here.
 
 @login_required
@@ -40,19 +44,36 @@ def profile_edit_view(request):
     return render(request, 'social/profile_edit.html', context)
 
 
+def fetch_quote():
+    endpoint = 'https://type.fit/api/quotes'
+
+    data = requests.get(endpoint)
+
+    if data.status_code == 200:
+        data = data.json()        
+        random_num = random.randint(1, 1643)
+
+        return f"{data[random_num]['text']} ~ {data[random_num]['author']}"
+    else:
+        return "“Education is the most powerful weapon you can use to change the world.”"
+
 @login_required
 def home(request):
 
     assignments = models.assignments.objects.filter(user=request.user)
     notes = models.notes.objects.filter(user=request.user).count()
+    todo = models.Task.objects.filter(user=request.user)
     deadlines = models.deadlines.objects.filter(user=request.user)
 
     context = {
-        "recent_assignments": assignments.order_by('-timestamp')[:3],
+        "recent_assignments": assignments.order_by('-timestamp')[:5],
         "assignment_count":assignments.count(),
         "notes_count":notes,
         "deadline_count":deadlines.count(),
-        "deadline":deadlines.order_by('last_date')[:3],
+        "deadline":deadlines.order_by('last_date')[:5],
+        "todo":todo.order_by('created')[:5],
+        "quote": fetch_quote(),
+        "today":timezone.now()
     }
 
     return render(request, 'dashboard/home.html', context)
@@ -62,7 +83,12 @@ def home(request):
 class create_assignments(LoginRequiredMixin, CreateView):
     model = models.assignments
     form_class = forms.create_assignments_form
-    template_name = 'dashboard/create_assignment.html'
+    template_name = 'dashboard/assignments/create_assignment.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -79,8 +105,13 @@ class create_assignments(LoginRequiredMixin, CreateView):
 
 class update_assignments(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = models.assignments
-    template_name = 'dashboard/create_assignment.html'
+    template_name = 'dashboard/assignments/update_assignment.html'
     form_class = forms.create_assignments_form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        return context
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -100,7 +131,7 @@ class update_assignments(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
 
 class list_assignments(LoginRequiredMixin, ListView):
     model = models.assignments
-    template_name = 'dashboard/list_assignment.html'
+    template_name = 'dashboard/assignments/list_assignment.html'
 
     def get_queryset(self, *args, **kwargs):
         queryset =  super().get_queryset(*args, **kwargs)
@@ -113,12 +144,20 @@ class list_assignments(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs) 
         context['categories'] = models.categories.objects.filter(user=self.request.user)
         context['assignments_w_o_category'] = self.get_queryset(**kwargs).filter(categories=None)
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
         return context
 
 
 class delete_assignment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    template_name = 'dashboard/assignment_delete.html'
+    template_name = 'dashboard/assignments/delete_assignment.html'
     model = models.assignments
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
 
     def get_success_url(self):
         return reverse_lazy('dashboard:assignment-list')
@@ -130,7 +169,13 @@ class delete_assignment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class create_categories(LoginRequiredMixin, CreateView):
     model = models.categories 
     form_class = forms.create_category_form
-    template_name = 'dashboard/create_category.html'
+    template_name = 'dashboard/category/create_category.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
 
     def post(self, request, *args, **kwargs):
         form = forms.create_category_form(request.POST)
@@ -144,23 +189,43 @@ class create_categories(LoginRequiredMixin, CreateView):
         else:
             form = forms.Create_category_form
 
-class delete_categories(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    template_name = 'dashboard/category_delete.html'
+class list_categories(LoginRequiredMixin, ListView):
     model = models.categories
+    template_name = 'dashboard/category/edit_category.html'
 
-    def get_success_url(self):
-        return reverse_lazy('dashboard:assignment-list')
+    def get_queryset(self, *args, **kwargs):
+        queryset =  super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['categories'] = self.get_queryset(**kwargs)
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
 
-    def test_func(self):
-        category = self.get_object()
-        return category.user == self.request.user
+@login_required
+def delete_categories(request, pk):
+    try:
+        category = models.categories.objects.get(user=request.user, pk=pk)
+    except:
+        raise Http404
+    
+    category.delete()
 
+    return redirect(reverse_lazy("dashboard:category-edit"))
 
 class create_notes(LoginRequiredMixin, CreateView):
 
     model = models.notes
-    template_name = 'dashboard/create_notes.html'
+    template_name = 'dashboard/notes/create_notes.html'
     form_class = forms.create_note_form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -177,7 +242,13 @@ class create_notes(LoginRequiredMixin, CreateView):
 
 class detail_notes(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = models.notes
-    template_name = 'dashboard/detail_notes.html'
+    template_name = 'dashboard/notes/detail_notes.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
 
     def test_func(self):
         notes = self.get_object()
@@ -186,23 +257,31 @@ class detail_notes(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 class list_notes(LoginRequiredMixin, ListView):
 
     model = models.notes
-    template_name = 'dashboard/list_notes.html'
+    template_name = 'dashboard/notes/list_notes.html'
     
     def get_queryset(self, *args, **kwargs):
         queryset =  super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(user=self.request.user)
+        queryset = queryset.filter(user=self.request.user).order_by('timestamp')
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
         context['categories'] = models.categories.objects.filter(user=self.request.user)
         context['notes_w_o_category'] = self.get_queryset(**kwargs).filter(categories=None)
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
         return context
 
 class update_notes(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = models.notes
-    template_name = 'dashboard/create_notes.html'
+    template_name = 'dashboard/notes/update_notes.html'
     form_class = forms.create_note_form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -221,8 +300,13 @@ class update_notes(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         return kwargs
 
 class delete_notes(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    template_name = 'dashboard/notes_delete.html'
+    template_name = 'dashboard/notes/delete_notes.html'
     model = models.notes
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        return context
 
     def get_success_url(self):
         return reverse_lazy('dashboard:notes-list')
@@ -234,7 +318,7 @@ class delete_notes(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class create_deadlines(LoginRequiredMixin, CreateView):
     model = models.deadlines
-    template_name = 'dashboard/create_deadlines.html'
+    template_name = 'dashboard/reminders/create_reminders.html'
     form_class = forms.create_deadline_form
 
     def form_valid(self, form):
@@ -250,11 +334,16 @@ class create_deadlines(LoginRequiredMixin, CreateView):
         })
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
+
 
 class list_deadlines(LoginRequiredMixin, ListView):
     model = models.deadlines
-    template_name = 'dashboard/list_deadlines.html'
-
+    template_name = 'dashboard/reminders/list_reminders.html'
 
     def get_queryset(self, *args, **kwargs):
         queryset =  super().get_queryset(*args, **kwargs)
@@ -264,11 +353,13 @@ class list_deadlines(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
         context['deadlines'] = self.get_queryset(**kwargs)
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
         return context
 
 class update_deadlines(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = models.deadlines
-    template_name = 'dashboard/create_deadlines.html'
+    template_name = 'dashboard/reminders/update_reminders.html'
     form_class = forms.create_deadline_form
 
     def form_valid(self, form):
@@ -288,8 +379,14 @@ class update_deadlines(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         })
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
+
 class delete_deadlines(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    template_name = 'dashboard/delete_deadlines.html'
+    template_name = 'dashboard/reminders/delete_reminders.html'
     model = models.deadlines
 
     def get_success_url(self):
@@ -307,33 +404,45 @@ class TaskList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['tasks'] = context['tasks'].filter(user=self.request.user).order_by('-created').order_by('complete')
         context['count'] = context['tasks'].filter(complete=False).count()
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
 
         search_input = self.request.GET.get('search-area') or ''
         if search_input:
             context['tasks'] = context['tasks'].filter(title__icontains=search_input)
         context['search_input'] = search_input
         return context
-
+    
 
 class TaskCreate(LoginRequiredMixin, CreateView):
-    model = models.Task
     template_name = 'dashboard/todo/create_todo.html'
-    fields = ['title', 'description', ]
     success_url = reverse_lazy('dashboard:task-list')
+    form_class = forms.create_todo_form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['today'] = timezone.now()
+        context['quote'] = fetch_quote()
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(TaskCreate, self).form_valid(form)
-
+        form.save()
+        return redirect(reverse_lazy('dashboard:task-list'))
+    
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = models.Task
     template_name = 'dashboard/todo/update_todo.html'
-    fields = ['title', 'description', 'complete']
+    form_class = forms.update_todo_form
     success_url = reverse_lazy('dashboard:task-list')
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return redirect(reverse_lazy('dashboard:task-list'))
 
 class TaskDelete(LoginRequiredMixin,  DeleteView):
     model = models.Task

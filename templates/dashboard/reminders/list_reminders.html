@@ -1,0 +1,31 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}Reminders{% endblock title %}
+{% block active_rem %}class="active"{% endblock active_rem %}
+{% block mainheading %}Reminders{% endblock mainheading %}
+
+{% block maincontent %}
+    <div class="spacer"><a href="{% url 'dashboard:reminders-create' %}"><button class="blue-btn color-red-btn btn-enlarger">Add new reminder</button></a></div>
+    <div class="spacer">
+        <h1 class="heading-category">Reminders: </h1>
+    </div>
+    <div class="reminder-holders">
+        {% for item in deadlines  %}
+        <div class="reminder-item {% if item.last_date|date:'d M Y' == today|date:'d M Y' %}green-fill{% elif item.is_past_due %}red-fill{% else %}white-fill{% endif %}">
+            <div class="img-holder-reminder">
+                <img src="{% static 'images/dashboard/rem.png' %}" alt="">
+            </div>
+            <div class="text-holder-reminder">
+                <h1 class="reminder-box-heading">{{ item.title }}</h1>
+                <p class="sub-title-reminder">{{ item.description }}</p>  
+                {% if item.assignments %}<p class="sub-title-reminder"><b>Assignment: </b> {{ item.assignments }}</p>{% endif %}
+            </div>
+            <div><ul><li>Added on: {{ item.timestamp|date:"D d M Y" }}</li><li>Deadline: {{ item.last_date }}</li></ul></div>
+            <div class="reminder-btn-holder"><a href="{% url 'dashboard:reminders-update' pk=item.pk %}"><button class="blue-btn"><i class="bi bi-pencil-square"></i></button></a><a href="{% url 'dashboard:reminders-delete' pk=item.pk %}"><button class="blue-btn"><i class="bi bi-trash"></i></button></a></div>
+        </div>
+        {% empty %}
+        <p class="sub-title">No reminders added, add one now!</p>
+        {% endfor %}
+    </div>
+{% endblock maincontent %}
