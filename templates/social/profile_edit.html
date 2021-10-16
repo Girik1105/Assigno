@@ -1,16 +1,22 @@
-{% extends "landing/landing_base.html" %}
+{% extends "landing/base.html" %}
 {% load bootstrap4 %}
+{% load static %}
 
-{% block maincontent  %}
-<div class="row justify-content-center mt-3">
-    <div class="col-md-8 col-sm-12 bg-light p-4">
-      <h1>Edit your Profile</h1>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="Submit" class="btn btn-primary" value="Save Changes">
-        <!-- in generic view it defaults to object -->
-      </form>
+{% block bootstrap_block %}<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock bootstrap_block %}
+{% block title %}Profile Settings{% endblock title %}
+{% block active_prof %}class="active"{% endblock active_prof %}
+{% block mainheading %}Profile Settings{% endblock mainheading %}
+
+{% block maincontent %}
+<div class="container">
+    <div class="form-container">
+        <div class="spacer"><h1 class="title">Profile Settings</h1></div>
+        <form method="POST" class="text-balancer" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" value="Update Profile" class="blue-btn color-red-btn btn-enlarger">
+        </form>
+        <a href="{% url 'dashboard:home' %}"><button class="blue-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
     </div>
 </div>
-{% endblock %}
+{% endblock maincontent %}

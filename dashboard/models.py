@@ -13,10 +13,10 @@ from datetime import date
 # Create your models here.
 class user_profile(models.Model):
     user = models.OneToOneField(User, primary_key=True, related_name='profile', on_delete=models.CASCADE)
-    name = models.CharField(max_length = 150, blank = True, null = True)
+    name = models.CharField(max_length = 150, null=True)
 
-    profile_picture = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.png', blank=True)
-    background = models.ImageField(upload_to='uploads/profile_background', default='uploads/profile_background/default.jpg', blank=True)
+    profile_picture = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.png')
+    background = models.ImageField(upload_to='uploads/profile_background', default='uploads/profile_background/default.jpg')
 
     GENDER_CHOICES = (
         ('', 'Choose Your Gender'),
@@ -25,9 +25,9 @@ class user_profile(models.Model):
         ('Rather Not Say', 'Rather Not Say')
     )
 
-    gender = models.CharField(max_length=14, choices=GENDER_CHOICES)
-    birth_date = models.DateField(blank = True, null = True)
-    location = models.CharField(max_length = 150, blank = True, null = True)
+    gender = models.CharField(max_length=14, choices=GENDER_CHOICES, null=True)
+    birth_date = models.DateField(null=True)
+    location = models.CharField(max_length = 150, null=True)
 
     def __str__(self):
         return self.user.username

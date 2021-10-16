@@ -1,0 +1,4 @@
+<div class="header">
+    <div class="greetings"><h1>Assigno</h1></div>
+    <div class="right-content">{% if user.is_authenticated %}<a href="{% url 'dashboard:home' %}">Go back to dashboard</a>{% endif %}</div>
+</div>

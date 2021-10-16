@@ -1,0 +1,33 @@
+a {
+    color: #fc7585;
+}
+
+.header {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #9799d5;
+    display: flex;
+    flex-direction: row;
+}
+
+.greetings {
+    font-family: 'Lobster', cursive;
+    margin-left: 3rem;
+    width: 50%;
+}
+
+.greetings h1{
+    font-size: 3rem;
+}
+
+.right-content {
+    display: flex;
+    justify-content: end;
+    padding: 1rem;
+    width: 50%;
+}
+
+.right-content a{
+    font-size: 1.5rem;
+    color: aqua;
+}
