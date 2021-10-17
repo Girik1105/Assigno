@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    transition: 1s ease-in;
+}
+ul{
+    font-family: 'Rubik', sans-serif;
+}
+li{
+    padding: 0 0 0 50px;
+}
+.navbar-brand{
+    font-family: 'Lobster', cursive;
+    font-size: 2rem;
+    color: #FFF7E0;
+}
+#title{
+    background-color: #ff7f8d;
+}
+.circle{
+    height: 32rem;
+    width: 35rem;
+    border-radius: 0 0 100% 0;
+    background: linear-gradient(-45deg, #ee7752, #FDBAF8, #CDF0EA, #CAF7E3);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+    max-width: 100%;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+.svg{
+    width:80%;
+    margin: 10% 15%;
+    max-width: 100%;
+    transition: 1s ease-in;
+}
+.main-content{
+    position: relative;
+    top: 15%;
+    width: 90%;
+    font-family: Quicksand;
+    max-width: 100%;
+}
+
+.hider{
+    visibility: hidden;
+}
+.mover{
+    height: 10px;
+    width: 10px;
+}
+
+
+
