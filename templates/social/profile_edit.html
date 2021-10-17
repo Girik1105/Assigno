@@ -1,4 +1,4 @@
-{% extends "landing/base.html" %}
+{% extends "account/base.html" %}
 {% load bootstrap4 %}
 {% load static %}
 
@@ -7,9 +7,9 @@
 {% block active_prof %}class="active"{% endblock active_prof %}
 {% block mainheading %}Profile Settings{% endblock mainheading %}
 
-{% block maincontent %}
+{% block content %}
 <div class="container">
-    <div class="form-container">
+    <div class="form-container text-light">
         <div class="spacer"><h1 class="title">Profile Settings</h1></div>
         <form method="POST" class="text-balancer" enctype="multipart/form-data">
             {% csrf_token %}
@@ -19,4 +19,4 @@
         <a href="{% url 'dashboard:home' %}"><button class="blue-btn btn-enlarger">Cancel <i class="bi bi-arrow-bar-left"></i></button></a>
     </div>
 </div>
-{% endblock maincontent %}
+{% endblock content %}

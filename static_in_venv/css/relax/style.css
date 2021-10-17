@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+
+p {
+    font-size: 1.8em;
+    color: #fff;
+    transition: 1s;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 6.7% auto;
+    height: 300px;
+    width: 300px;
+    position: relative;
+    transform: scale(1);
+}
+  
+.circle {
+    background-color: #010f1c;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+  
+.gradient-circle {
+    background: conic-gradient(#00e1ff 0%,#00e1ff 40%,#3579f8 40%,#3579f8 60%,#05ffde 60%,#05ffde 100%);
+    height: 320px;
+    width: 320px;
+    z-index: -2;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+  
+.pointer {
+    background-color: #fff;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: block;
+}
+  
+.pointer-container {
+    position: absolute;
+    top: -40px;
+    left: 140px;
+    width: 20px;
+    height: 190px;
+    animation: rotate 7.5s linear forwards infinite;
+    transform-origin: bottom center;
+}
+
+.d-board {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.2em;
+  text-decoration: none;
+  margin: 2rem;
+  padding: 1em;
+  color: white;
+  background-color: #00e1ff;
+  border-radius: 3em;
+}
+
+.d-board:hover {
+  background-color: #00d1ec;
+}
+
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+  
+    to {
+      transform: rotate(360deg);
+    }
+}
+  
+.container.grow {
+    animation: grow 3s linear forwards;
+}
+  
+@keyframes grow {
+    from {
+      transform: scale(1);
+    }
+  
+    to {
+      transform: scale(1.2);
+    }
+}
+  
+.container.shrink {
+    animation: shrink 3s linear forwards;
+}
+  
+@keyframes shrink {
+    from {
+      transform: scale(1.2);
+    }
+  
+    to {
+      transform: scale(1);
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+  .container {
+    margin: 3% auto;
+  }
+}

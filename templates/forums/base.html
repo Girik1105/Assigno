@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bootstrap %}<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock bootstrap %}
+    {% include "forums/snippets/head.html" %}
+    <title>{% block title %}Forums{% endblock title %}</title>
+
+</head>
+<body>
+    <div class="container-group">
+
+        <div class="group-navbar">
+            <div class="group-nav">
+                <ul class="group-nav-elements">
+                    <li {% block act_lis %}{% endblock act_lis %}><a href="{% url 'forums:list-forums' %}">All Forums</a></li>
+                    <li {% block act_cre %}{% endblock act_cre %}><a href="{% url 'forums:create-forum' %}">Create Forum</a></li>
+                    <li><a href="{% url 'dashboard:home' %}">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="group-desc">{% block topbar %}{% endblock topbar %}</div>
+
+
+        <div class="sidebar"><div class="grp-admins"></div></div>
+
+        <div class="main">{% block maincontent %}{% endblock maincontent %}</div>
+
+        <div class="sidebar">{% block rightbar %}{% include "dashboard/snippets/account_rightbar.html" %}{% endblock rightbar %}</div>
+
+    </div>
+
+    {% include "forums/snippets/footer.html" %}
+
+</body>
+</html>

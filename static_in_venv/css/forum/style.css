@@ -1,0 +1,895 @@
+* {
+    box-sizing: border-box;
+}
+
+::selection{
+    background-color: #00B0FF;;
+}
+
+body::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #1DA1F2;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+
+input:focus, input:active{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    border-color: transparent;
+}
+
+body {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    text-align:center;
+    font-size: 1.5rem;
+}
+
+/* index.html */
+
+.container{
+    display:grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: 0.5fr 1.2fr 0.7fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "sidebar main right-panel"
+    ;
+    grid-column-gap: 0.3rem;
+}
+
+/* sidebar css */
+
+.sidebar {
+    grid-area:sidebar;
+}
+
+.sidebar .nav {
+    height:100vh;
+    width: 100%;
+    position: sticky;
+    top:0;
+    
+}
+
+.sidebar .nav .nav-elements li {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    padding: 0.2em 0 0.2em 0;
+    list-style: none;
+    line-height: 2.5em;
+    text-align: start;
+    font-style: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.sidebar .nav .nav-elements li a {
+    text-decoration: none;
+    color: white;
+}
+
+.feather{
+    margin: 0 0.5em 0 0.4em;
+}
+
+.sidebar .nav .nav-elements  li a:hover{
+    color: #00B0FF;
+    border-radius: 1rem;
+}
+
+.sidebar .nav-profile {
+    position: absolute;
+    bottom: 10%;
+    left: 0%;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .nav .nav-elements .nav-active a{
+    color: #00B0FF;
+    border-radius: 1rem;
+}
+
+.sidebar .nav-profile .profile-pic img{
+    border-radius: 100%;
+    height: 3rem;
+    width: 3rem; 
+    margin-left: 1.7em;
+}
+
+.sidebar .nav-profile .profile-name {
+    text-align: start;
+    padding: 0.4em;
+    margin-bottom: 0.5em;
+    font-size: 0.7em;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* sidebar css end */
+
+/* index.html group.css main.css */
+
+.main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    /* border-left: 0.2px solid rgba(255, 255, 255, 0.5);
+    border-right: 0.2px solid rgba(255, 255, 255, 0.5); */
+}
+
+.main-title {
+    text-align: start;
+    padding: 0.1em 1em;
+    font-size: 1.2em;
+    font-weight: 600;
+    /* border-bottom: 0.5px solid rgba(255, 255, 255, 0.5); */
+}
+
+.new-post-wrapper {
+    height: 25vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    padding:0.5em;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.what-happening .post-text-area{
+    width: 80%;
+    height: 4rem;
+    margin: 0;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    color: #fff;
+    outline: none;
+}
+
+.what-happening .post-text-area:focus{
+    border-bottom: 1px solid #00B0FF;
+}
+
+.post-btn-holder{
+    display: flex;
+    margin: 0.2em 0 0 3.5rem;
+    align-self: flex-start;
+}
+
+
+.post {
+    width: 95%;
+    height: auto;
+    margin: 0.7rem auto;
+    border: 1px solid rgb(218, 215, 215);
+    box-shadow: 0 0.3em 0.5em -0.4em rgb(218, 215, 215);
+    border-radius: 0.7em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-basis: 100%;
+    font-family: 'Lato', sans-serif;
+}
+
+.post .post-profile {
+    height: auto;
+    width: 100%;
+    padding: 0 0.8em;
+    margin: 0.4em 0 0.2em 0;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.post .post-profile .post-profile-pic {
+    align-self: flex-start;
+    margin-left: 1em;
+}
+
+.post .post-profile .post-profile-name {
+    align-self: flex-start;
+    padding: 0.5rem;
+    margin-left: 0.5em;
+}
+
+.post .post-content {
+    padding: 00 2em 0em 2em;
+    text-align: start;
+    font-size: 0.8em;
+}
+
+.post .post-content .post-image{
+    width: 100%;
+    border-radius: 1em;
+}
+
+.post .post-profile .post-profile-username {
+    padding: 0.8rem 0.8rem 0.8rem 0;
+    opacity: 0.5;
+    font-size: 0.7em;
+}
+
+
+
+.post .post-profile .post-profile-pic img {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 100%;
+    padding: 0.2rem;
+}
+
+.post .post-like-comment {
+    margin-top: 0.7em;
+    padding: 2em 0.1em 0 1.4em;
+    text-align: start;
+    font-size: 1em;
+    width: 100%;
+    height: auto;
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+.post .post-like-comment {
+    padding: 0 0.1em 0.4em 1.4em;
+    text-align: start;
+    font-size: 1.2em;
+}
+
+.post .post-like-comment .feather {
+    font-size: 1.8rem;
+}
+
+.post-bm {
+    float: right;
+    margin: 0.25em 1.3em 0 0;
+}
+
+/* main css end */
+
+/* right panel css */
+
+.right-panel {
+    grid-area: right-panel;
+}
+
+
+.search{
+    margin-top: 1rem;
+}
+
+.search-bar {
+    border: 1px solid #fff;
+    border-radius: 2rem;
+    height: 3rem;
+    width: 60%;
+    background: none;
+    transition:0.7s;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+}
+
+.search-bar:focus {
+    transform: scale(1.1);
+    border: 2px solid #00B0FF;
+    color:#fff;
+}
+
+.to-follow {
+    height: 25rem;
+    width: 90%;
+    margin: 1rem auto;
+    margin-top: 1rem;
+    border-radius: 0.8rem;
+    border: 1px solid rgb(218, 215, 215);
+    box-shadow: 0 0.3em 0.5em -0.4em rgb(218, 215, 215);
+    display: flex;
+    flex-direction:column;
+    font-family: 'Lato', sans-serif;
+    /* flex-basis: 100%; */
+}
+
+.to-follow .follower {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.to-follow .follower .follow-profile-pic img {
+    width: 4rem;
+    height: 4rem;
+    margin: 0.5em 0.55em 0 2.6em;
+    border-radius: 100%;
+}
+
+.to-follow .follower .follow-profile-name {
+    margin: 1em 0 0.5em 0.5em;
+    font-size: 0.8em;
+    text-align: start;
+    width: 45%;
+}
+
+.to-follow .follower .follow-profile-name .subtitle {
+    opacity: 0.7;
+    font-size: 1rem;
+}
+
+.to-follow .follower .explore-img{
+    width: 40%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    padding: 0.5rem;
+}
+
+.to-follow .follower .explore-img img{
+    width: 100%;
+    border-radius: 1em;
+}
+
+/* .to-follow .follow-profile-username {
+    font-size: 0.8em;
+    margin: 1.5em 0 0.5em 0;
+    width: 100%;
+} */
+
+/* right panel css end */
+
+/* responsive media query start */
+
+
+.container-group {
+    display:grid;
+    height: 100vh;
+    margin-top: 4rem;
+    width: 100%;
+    grid-template-columns: 1.4fr 0.8fr ;
+    grid-template-rows: 0.4fr 0.8fr 1fr;
+    grid-template-areas:
+        "navbar   navbar "
+        "group    group"
+        "main     sidebar"
+    ;
+    grid-column-gap: 0.3rem;
+}
+
+.group-navbar {
+    grid-area: navbar;
+}
+
+.group-nav{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-bottom: 1px solid rgb(218, 215, 215);
+    box-shadow: 0 0.3em 0.5em -0.4em rgb(218, 215, 215);
+}
+
+.group-nav-elements{
+    width: 100%;
+    margin: auto;
+    padding: 0.2em 0 0.2em 0;
+    list-style: none;
+    line-height: 2.5em;
+    text-align: start;
+    font-style: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: flex;
+    align-items: space-around;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.group-nav-elements li a {
+    text-decoration: none;
+    color: black;
+}
+
+.group-nav-elements li a:hover {
+    color: #00B0FF;
+}
+
+.group-nav-elements .nav-active a{
+    color: #00B0FF;
+    border-radius: 1rem;
+}
+
+.group-desc {
+    grid-area: group;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    font-family: 'Mukta', sans-serif;
+}
+
+.group-desc .group-cover{
+    padding:0.3em;
+    width: 65%;
+    margin:0;
+}
+
+.group-desc .group-cover img{
+    width: 100%;
+    border-radius: 0.8em;
+}
+
+.group-desc .group-credentials {
+    width: 30%;
+    text-align: start;
+    padding: 0.5em;
+    font-size: 1em;
+}
+
+
+@media only screen and (max-width:1026px) {
+    .container-group{
+        display:grid;
+        height: 100vh;
+        margin-top: 4rem;
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.4fr 0.8fr 0.8fr 1fr;
+        grid-template-areas:
+            "navbar"
+            "group"
+            "sidebar"
+            "main"
+        ;
+        grid-column-gap: 0.3rem;
+    }
+    .to-follow {
+        display: flex;
+        position: relative;
+    }
+    .group-desc .group-cover {
+        width:100%;
+    }
+    .group-desc .group-credentials {
+        width: 100%;
+    }
+
+}
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-basis: 100%;
+}
+
+.profile-top {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border-bottom: 0.2px solid rgb(255, 255, 255, 0.2);
+    height: 10vh;
+    width: 100%;
+}
+
+.back-arrow{
+    margin-top: 0.5rem;
+}
+
+.back-arrow .feather {
+    background-color: #00B0FF;;
+    border-radius: 50%;
+}
+
+.profile-banner-info-symbols {
+    width: 100%;
+    height: auto;
+    padding: 0.7rem;
+    text-align: start;
+    font-size: 1rem; 
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.profile-banner-symbol-vol-1{
+    width:50%;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-banner-info-symbols .profile-banner-symbol-vol-1 div {
+    margin-right: 2rem;
+}
+
+.profile-banner-symbol-vol-2{
+    width:50%;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-banner-info-symbols .profile-banner-symbol-vol-2 div {
+    margin: 0.3rem 2rem 0 0;
+    font-size: 1.2rem; 
+    padding: 0;
+}
+
+
+.profile-banner-info-symbols .feather {
+    margin: 0;
+}
+
+.profile-banner-info-symbols .banner-symbol-text{
+    margin: 0.2rem;
+}
+
+.profle-banner {
+    width: 100%;
+}
+
+.profile-banner-img {
+    width: 100%;
+    height: 100%;
+}
+
+.banner-profile-pic {
+    height: 4.2em;
+    width: 28%;
+    border-radius: 100%;
+}
+
+.banner-profile-pic-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.banner-profile-info {
+    padding: 0.2em;
+    width: 100%;
+    height: auto;
+    text-align: start;
+}
+
+.banner-content {
+    width: 100%;
+    height: auto;
+    margin-top: 0.3rem;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
+.banner-content-btn {
+    width: 100%;
+    margin-top: 1.8rem;
+    margin-left: 0.5em;
+}
+
+.banner-content-names {
+    width: 20%;
+}
+
+.banner-profile-username{
+    font-size: 0.8em;
+    opacity: 0.6;
+}
+
+.banner-profile-name{
+    font-weight: 600;
+}
+
+.banner-profile-bio {
+    width: 80%;
+    margin: auto;
+    height: auto;
+    font-size: 0.8em;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+}
+
+.profile-post-wrapper {
+    /* margin-top: 1rem; */
+    text-align: start;
+}
+.profile-post-wrapper p{
+    margin: 0 2rem;
+    font-size: 2.2rem;
+}
+
+.profile-post-group-nav{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.profile-post-group-nav li{
+    margin: 0 2rem;
+    padding: 0.5rem;
+    font-weight: 600;
+}
+
+.profile-post-group-nav .active {
+    border-bottom: 3px solid #00B0FF;
+    color: #00B0FF;
+}
+
+.profile-post-group-nav li:hover{
+    color: #00B0FF;
+}
+
+.form-balancer {
+    padding: 1rem;
+    font-size: smaller;
+}
+
+.account-credentials .profile-image-holder {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.account-credentials .profile-image-holder img{
+    height: auto;
+    width: 10rem;
+    margin-left: 0.7rem;
+    border-radius: 100%;
+}
+
+.account-credentials .right-bar-name {
+    font-size: 1.5rem;
+    padding: 0.2rem;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.account-credentials .right-bar-location {
+    font-size: 1.5rem;
+    padding: 0.2rem;
+    margin: 0.7rem 0;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.forum-div {
+    width: 90%;
+    margin: 1rem 5%;
+    border-radius: 1em;
+    display: flex;
+    flex: row;
+    flex-wrap: wrap;
+    border: 1px solid rgb(204, 219, 223);
+}
+
+.forum-div .image-holder {
+    height: 10rem;
+    width: 30%;
+}
+
+.forum-div .image-holder img{
+    height: 100%;
+    width: 100%;
+    border-radius: 1em;
+}
+
+.forum-info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0.8rem;
+}
+
+.forum-info h1 {
+    font-size: 1.2em;
+}
+
+.forum-info .forum-desc {
+    font-size : 0.7em;
+}
+
+.forum-info .timestamp-text {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.btn-holder {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0.8rem;
+}
+
+
+
+
+
+@media only screen and (min-width:1600px) {
+    .post {
+        width: 80%;
+        height: auto;
+        margin: 0.5rem auto;
+        background: #232426;
+        border-radius: 1em;
+    }
+    .sidebar .nav .nav-elements{
+        margin-left: 5rem;
+
+    }   
+    .sidebar .nav .nav-profile{
+        margin-left: 5rem;
+    }  
+    .banner-profile-info .banner-content .banner-profile-pic {
+        height: 6.2em;
+        width: 28%;
+    }
+    .to-follow {
+        height: 32rem;
+    }
+    .forum-div {
+        width: 70%;
+        margin: 1rem 15%;
+        border-radius: 1em;
+        display: flex;
+        flex: row;
+        flex-wrap: wrap;
+        border: 1px solid rgb(204, 219, 223);
+    }
+}
+
+
+@media only screen and (max-width:1026px) {
+    .container{
+        display:grid;
+        height: 100vh;
+        width: 100%;
+        grid-template-columns: 0.2fr 1.2fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "sidebar main"
+        ;
+        grid-column-gap: 0.3rem;
+    }
+    .nav-text {
+        position: absolute;
+        display:none;
+    }
+    .profile-name{
+        position: absolute;
+        display:none;
+    }
+    .right-panel{
+        display: none;
+        position: absolute;
+    }
+    .to-follow {
+        display: none;
+        position: absolute;
+    }
+    .search{
+        display: none;
+        position: absolute;
+    }
+    .nav-text {
+        position: absolute;
+        display:none;
+    }
+    .profile-name{
+        position: absolute;
+        display:none;
+    }
+    .banner-profile-info .banner-content .banner-profile-pic {
+        height: 4.8em;
+        width: 24%;
+    }
+}
+
+@media only screen and (max-width:550px) {
+    
+    .container{
+        display:grid;
+        height: 100vh;
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.4fr 1.4fr 1fr;
+        grid-template-areas:
+            "sidebar"
+            "main"
+            "right-panel"
+        ;
+        grid-column-gap: 0.3rem;
+    }
+    .sidebar{
+        grid-area: sidebar;
+    }
+
+    .sidebar .nav {
+        width: 80%;
+        margin-left: 7%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar .nav .nav-elements{
+        width: 100%;
+        position: relative;
+        display:flex;
+    }
+
+    .sidebar .nav .nav-elements li {
+        align-items: space-around;
+        justify-content: space-around;
+        list-style: none;
+        line-height: 2.5em;
+        text-align: start;
+        font-style: bold;
+        font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    .feather{
+        margin: 0 0 0 0;
+    }
+
+    .sidebar .nav li:hover{
+        color: #00B0FF;
+        background-color:none;
+    }
+    
+    .sidebar .nav-profile {
+        position: absolute;
+        display: none;
+    }
+    
+    .nav-text {
+        position: absolute;
+        display:none;
+    }
+
+    .post .post-profile .post-profile-pic {
+        margin-left: 0;
+    }
+
+    .post .post-profile .post-profile-username{
+        position: absolute;
+        display: none;
+    }
+
+    .post .post-content {
+        padding: 0 2em 1em 2em;
+        text-align: start;
+        font-size: 0.8em;
+    }
+    .post-bm {
+        float: right;
+        margin: 0.3em 1.6em 0 0;
+    }
+    .social-media{
+        opacity: 0;
+        display: none;
+        position: absolute;
+    }
+    .banner-profile-info .banner-content .banner-profile-pic {
+        height: 4.8em;
+        width: 35%;
+    }
+}
+
+/* media query end */

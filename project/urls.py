@@ -31,7 +31,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     path('', include('dashboard.urls')),
-    path('', include('forums.urls')),
+    path('forums/', include('forums.urls')),
 ]
 
 if settings.DEBUG:

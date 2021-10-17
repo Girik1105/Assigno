@@ -12,7 +12,8 @@ from django.views.generic import (CreateView,
                                   DetailView, 
                                   ListView, 
                                   UpdateView, 
-                                  DeleteView)
+                                  DeleteView,
+                                  TemplateView)
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -449,3 +450,7 @@ class TaskDelete(LoginRequiredMixin,  DeleteView):
     template_name = 'dashboard/todo/delete_todo.html'
     context_object_name = 'task'
     success_url = reverse_lazy('dashboard:task-list')
+
+
+class meditation(TemplateView):
+    template_name = "relax/index.html"

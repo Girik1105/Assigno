@@ -9,15 +9,15 @@
 {% if today|date:"d M" == user.profile.birth_date|date:"d M" %}<div class="spacer"><h1 class="headings">happiest Birthday {{ user.profile.name }}! 🎂🎉</h1></div>{% endif %}
 <div class="main-area-footer heading-font">
   <div class="main-area-footer-box">
-      <div class="card-title-holder"><i class="bi bi-bell-fill"></i>Notes </div>
+      <div class="card-title-holder"><i class="bi bi-paperclip"></i>Notes </div>
       <div class="number-holder"><span class="number">{{ notes_count }}</span></div>
   </div>
   <div class="main-area-footer-box">
-      <div class="card-title-holder"><i class="bi bi-file-earmark-fill"></i>Reminders </div>
+      <div class="card-title-holder"><i class="bi bi-bell-fill"></i>Reminders </div>
       <div class="number-holder"><span class="number">{{ deadline_count }}</span></div>
   </div>
   <div class="main-area-footer-box">
-      <div class="card-title-holder"><i class="bi bi-card-list"></i>Assignments </div>
+      <div class="card-title-holder"><i class="bi bi-file-earmark-fill"></i>Assignments </div>
       <div class="number-holder"><span class="number">{{ assignment_count }}</span></div>
   </div>
 </div>
@@ -43,6 +43,12 @@
           {% empty %} <p class="sub-title">(No Reminders)</p> {% endfor %} 
         </div>
     </div>
+</div>
+
+<div class="mini-bar">
+  <ul>
+    <li><a href="{% url 'dashboard:meditation' %}">Meditation</a><li><a href="{% url 'account_reset_password' %}">Password Reset</a></li><li><a href="{% url 'account_email' %}">Account Email</a></li></li>
+  </ul>
 </div>
 {% endblock maincontent %}
 

@@ -32,4 +32,6 @@ urlpatterns = [
     path('dashboard/tasks/all/', views.TaskList.as_view(), name='task-list'),
     path('dashboard/tasks/update/<int:pk>/', views.TaskUpdate.as_view(), name='task-update'),
     path('dashboard/tasks/delete/<int:pk>/', views.TaskDelete.as_view(), name='task-delete'),
+
+    path('meditation/', views.meditation.as_view(), name='meditation')
 ]

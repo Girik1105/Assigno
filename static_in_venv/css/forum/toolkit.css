@@ -1,0 +1,26 @@
+.blue-btn{
+    padding: 0.5em 1em;
+    margin: 0.5rem;
+    background: none;
+    color: rgb(83, 210, 241);
+    border: 2px solid;
+    border-radius: 0.7em;
+    font-size: 0.7em;
+    transition: all 0.7s ease-out; 
+}
+
+.blue-btn:hover{
+    border-color: #03a0e9;
+    box-shadow: 0 0.5em 0.5em -0.4em #00a2ec;
+    transform: translateY(-0.25em);
+}
+
+.blue-btn--text {
+    display: inline-block;
+    position: relative;
+}
+
+.sticker  {
+    position: sticky;
+    top: 2%;
+}

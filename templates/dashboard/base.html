@@ -24,7 +24,8 @@
                     <li {% block active_note %}{% endblock active_note %}><a href="{% url 'dashboard:notes-list' %}"> <i class="bi bi-paperclip"></i> <span class="text">Notes</span></a></li>
                     <li {% block active_rem %}{% endblock active_rem %}><a href="{% url 'dashboard:reminders-list' %}"> <i class="bi bi-bell"></i> <span class="text">Reminders</span> </a></li>
                     <li {% block active_to %}{% endblock active_to %}><a href="{% url 'dashboard:task-list' %}"> <i class="bi bi-pencil-square"></i> <span class="text">To-do</span> </a></li>
-                    <li {% block active_prof %}{% endblock active_prof %}><a href="{% url 'dashboard:edit-user-profile' %}"> <i class="bi bi-gear"></i> <span class="text">Profile</span> </a></li>
+                    <li><a href="{% url 'forums:list-forums' %}"> <i class="bi bi-people"></i> <span class="text">Forums</span> </a></li>
+                    <li><a href="{% url 'dashboard:edit-user-profile' %}"> <i class="bi bi-gear"></i> <span class="text">Profile</span> </a></li>
                 </ul>
             </div>
             <!--Navbar End-->
