@@ -5,19 +5,35 @@
 {% block topbar %}{% endblock topbar %}
 
 {% block maincontent %}
-
-<h1>Forums you can join</h1>
-{% for item in forum_list %}
-    <div class="forum-div">
-        <div class="image-holder"><img src="{{ item.cover.url }}" alt="not loaded"></div>
-        <div class="forum-info">
-            <h1>{{ item }}</h1>
-            <p class="forum-desc">{{ item.description }}</p>
-            <p class="timestamp-text"><b>Since:</b> {{ item.timestamp|date:"d M Y" }}</p>
+<h1>Forums you are in: </h1>
+    {% for item in user_forums %}
+        <div class="forum-div">
+            <div class="image-holder"><img src="{{ item.cover.url }}" alt="not loaded"></div>
+            <div class="forum-info">
+                <h1>{{ item }}</h1>
+                <p class="forum-desc">{{ item.description }}</p>
+                <p class="timestamp-text"><b>Since:</b> {{ item.timestamp|date:"d M Y" }}</p>
+            </div>
+            <div class="btn-holder">
+                <a href="{% url 'forums:detail-forum' slug=item.slug %}"><button class="blue-btn">View</button></a>
+                {% if item.admin == request.user %}<a href="{% url 'forums:update-forum' slug=item.slug %}"><button class="blue-btn">Edit</button></a>{% endif %}
+            </div>
         </div>
-        <div class="btn-holder"><a href="{% url 'forums:detail-forum' slug=item.slug %}"><button class="blue-btn">View</button></a></div>
-    </div>
-{% endfor %}
-
+    {% endfor %}
+<h1>Forums you can join</h1>
+    {% for item in forum_list %}
+        <div class="forum-div">
+            <div class="image-holder"><img src="{{ item.cover.url }}" alt="not loaded"></div>
+            <div class="forum-info">
+                <h1>{{ item }}</h1>
+                <p class="forum-desc">{{ item.description }}</p>
+                <p class="timestamp-text"><b>Since:</b> {{ item.timestamp|date:"d M Y" }}</p>
+            </div>
+            <div class="btn-holder">
+                <a href="{% url 'forums:detail-forum' slug=item.slug %}"><button class="blue-btn">View</button></a>
+                {% if item.admin == request.user %}<a href="{% url 'forums:update-forum' slug=item.slug %}"><button class="blue-btn">Edit</button></a>{% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock maincontent %}
 

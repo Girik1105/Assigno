@@ -139,10 +139,11 @@ body {
 }
 
 .new-post-wrapper {
-    height: 25vh;
+    height: auto;
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: space-around;
     flex-basis: 100%;
     padding:0.5em;
     border-radius: 1rem;
@@ -170,17 +171,18 @@ body {
     align-self: flex-start;
 }
 
-
 .post {
     width: 95%;
     height: auto;
     margin: 0.7rem auto;
+    padding: 1rem 0;
     border: 1px solid rgb(218, 215, 215);
+    background-color: white;
     box-shadow: 0 0.3em 0.5em -0.4em rgb(218, 215, 215);
     border-radius: 0.7em;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     flex-basis: 100%;
     font-family: 'Lato', sans-serif;
 }
@@ -209,7 +211,8 @@ body {
 }
 
 .post .post-content {
-    padding: 00 2em 0em 2em;
+    padding: 0 2em 0em 2em;
+    margin: 0.5rem 0;
     text-align: start;
     font-size: 0.8em;
 }
@@ -291,7 +294,7 @@ body {
 }
 
 .to-follow {
-    height: 25rem;
+    height: auto;
     width: 90%;
     margin: 1rem auto;
     margin-top: 1rem;
@@ -727,7 +730,6 @@ body {
         width: 80%;
         height: auto;
         margin: 0.5rem auto;
-        background: #232426;
         border-radius: 1em;
     }
     .sidebar .nav .nav-elements{

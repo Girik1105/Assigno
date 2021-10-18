@@ -1,0 +1,18 @@
+{% extends "forums/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block topbar %}{% endblock topbar %}
+
+{% block maincontent %}
+<div class="form-balancer">
+    <h1>Update {{ forum }}</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Update Forum" class="blue-btn">
+    </form>
+    <a href="{% url 'forums:detail-forum' slug=forum.slug %}"><button class="blue-btn">Back</button></a>
+</div>
+{% endblock maincontent %}
+

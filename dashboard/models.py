@@ -60,7 +60,7 @@ class notes(models.Model):
     categories = models.ManyToManyField(categories,related_name="notes_in_category",blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.title
 
 class deadlines(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)

@@ -6,6 +6,8 @@ User = get_user_model()
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
+from django.urls import reverse
+
 from django.utils.text import slugify
 
 from dashboard import models as dashboard_models
@@ -15,13 +17,16 @@ class forum(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     
-    admin = models.ForeignKey(User, blank=True, related_name='forum_admin', on_delete= models.CASCADE)
+    admin = models.ForeignKey(User, related_name='forum_admin', on_delete= models.CASCADE)
 
     members = models.ManyToManyField(User, through='forum_member')
     cover = models.ImageField(upload_to='uploads/covers', default='uploads/covers/default.jpg', blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     slug = models.SlugField(allow_unicode=True, unique=True)
+
+    def get_absolute_url(self):
+        return reverse('forums:detail-forum', kwargs={'slug':self.slug})
 
     def __str__(self):
         return self.name
@@ -58,11 +63,16 @@ class forum_post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     content = models.TextField()
-    notes = models.ForeignKey(dashboard_models.notes, related_name='note_shared_on', on_delete=models.CASCADE)
-    assignments =  models.ForeignKey(dashboard_models.assignments, related_name='assignment_shared_on', on_delete=models.CASCADE)
+    notes = models.ForeignKey(dashboard_models.notes, blank=True, null=True, related_name='note_shared_on', on_delete=models.CASCADE)
+    assignments =  models.ForeignKey(dashboard_models.assignments, blank=True, null=True, related_name='assignment_shared_on', on_delete=models.CASCADE)
 
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    class Meta():
+        ordering = ["-timestamp"]
+
+    def __str__(self):
+        return f"{self.user} in {self.forum}"
     
 class forum_post_comment(models.Model):
     forum_post = models.ForeignKey(forum_post, related_name='comments', on_delete=models.CASCADE)
