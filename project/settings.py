@@ -185,8 +185,12 @@ else:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_venv')]
-STATIC_ROOT= os.path.join(BASE_DIR,'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static_in_venv')
+]
+
+STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
 
 if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
