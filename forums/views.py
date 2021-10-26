@@ -146,3 +146,18 @@ class leave_forum(LoginRequiredMixin, RedirectView):
             )
         return super().get(request, *args, **kwargs)
 
+
+class delete_forum_post(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = 'forums/posts/post_delete.html'
+    model = models.forum_post
+
+    def get_success_url(self):
+        forum = self.get_object().forum.slug
+        
+        return reverse_lazy('detail-group', kwargs={
+                'slug': forum
+            })
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.forum.admin or self.request.user == post.user
