@@ -150,7 +150,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/kolkata'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -158,7 +158,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y/%m/%d', '%d-%m-%Y','%Y-%m-%d')
+# DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y/%m/%d', '%d-%m-%Y','%Y-%m-%d')
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
